@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS nodebbs_db;
+CREATE DATABASE nodebbs_db;
