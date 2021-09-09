@@ -1,4 +1,4 @@
-const {Model, DataTypes} = require('sequelize');
+const {Model, DataTypes, UUIDV4} = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
@@ -14,7 +14,8 @@ User.init(
             type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
-            unique: true
+            unique: true,
+            defaultValue: DataTypes.UUIDV4
         },
         username: {
             type: DataTypes.STRING(30),
