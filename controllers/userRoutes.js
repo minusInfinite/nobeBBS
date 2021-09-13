@@ -8,6 +8,10 @@ router.get('/login', (req, res) => {
     res.render('login');
 })
 
+router.get('/signup', (req, res) => {
+    res.render('signup');
+})
+
 // LOGOUT ROUTE i.e. remove session
 router.get('/logout', (req, res) => {
     req.session.destroy();
