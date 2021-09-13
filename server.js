@@ -17,7 +17,9 @@ const hbs = exphbs.create({ helpers })
 
 const sess = {
     secret: process.env.CSECRET,
-    cookie: {},
+    cookie: {
+        maxAge: 1000*60*60*24 // EXPIRES IN 1 DAY(1000ms * 60s * 60m * 24hr = 1 day)
+    },
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
