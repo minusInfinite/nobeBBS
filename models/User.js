@@ -1,8 +1,9 @@
-const {Model, DataTypes, UUIDV4} = require('sequelize');
+const {Model, DataTypes} = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
 class User extends Model {
+    // check if the inputted password matches the one stored on the user
     validatePassword(loginPw) {
         return bcrypt.compareSync(loginPw, this.password);
     }
@@ -42,6 +43,7 @@ User.init(
     },
     {
         hooks: {
+            // use bcrypt to hash the raw password input on user create and update
             beforeCreate: async (newUserData) => {
                 newUserData.password = await bcrypt.hash(newUserData.password, 12);
                 return newUserData;
