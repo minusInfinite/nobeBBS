@@ -1,5 +1,8 @@
 const router = require('express').Router();
+const passport = require('passport');
 const {isAuth, isAdmin} = require('./middleware/auth')
+const {User} = require('../models');
+
 // test route 
 router.get('/', (req, res) => {
     res.send('HELLO WORLD');
@@ -23,8 +26,8 @@ router.get('/signup', (req, res) => {
 
 // removes user from session and req
 router.get('/logout', (req, res) => {
-    req.logout();
     User.update({last_login: Date.now()}, {where: { id: req.user.id }});
+    req.logout();
     res.redirect('/users/');
 })
 
