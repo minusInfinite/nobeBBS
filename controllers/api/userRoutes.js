@@ -28,4 +28,31 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
     }
 });
 
+router.patch('/updatepass', async (req, res) => {
+    if(req.user) {
+        const user = await User.findByPk(req.user.id, {plain: true})
+        const isValid = user.validatePassword(req.body.currentPassword);
+        if (isValid) {
+            user.password = req.body.newPassword;
+            await user.save();
+            res.status(200).json('success');
+        } else {
+            res.status(400).json({msg: 'failed to update'})
+        }
+    } else {
+        res.status(400).json({msg: 'failed to update'})
+    }
+})
+
+router.patch('/updateavatar', async (req, res) => {
+    if(req.user) {
+        const user = await User.findByPk(req.user.id, {plain: true})
+        user.avatar = req.body.avatar;
+        await user.save();
+        res.status(200).json('success');
+    } else {
+        res.status(400).json({msg: 'failed to update'})
+    }
+})
+
 module.exports = router;
