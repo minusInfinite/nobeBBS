@@ -1,6 +1,6 @@
-const Post = require('./Post');
+const Post = require('./Topic');
 
-User.hasMany(Post, {
+User.hasMany(Topic, {
     foreignKey: 'user_id'
 });
 
@@ -12,4 +12,4 @@ Post.hasMany(Comment, {
     foreignKey: 'post_id'
 });
 
-module.exports = { Post };
+module.exports = { Topic };
