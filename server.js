@@ -7,6 +7,7 @@ const routes = require("./controllers")
 const helpers = require("./utils/helpers")
 
 const sequelize = require("./config/connection")
+const passport = require("passport")
 const SequelizeStore = require("connect-session-sequelize")(session.Store)
 
 const app = express()
@@ -15,6 +16,15 @@ const PORT = process.env.PORT || 3001
 // Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({ helpers })
 
+// Inform Express.js on which template engine to use
+app.engine("handlebars", hbs.engine)
+app.set("view engine", "handlebars")
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, "public")))
+
+// express session
 const sess = {
     secret: process.env.CSECRET,
     cookie: {
@@ -29,13 +39,18 @@ const sess = {
 
 app.use(session(sess))
 
-// Inform Express.js on which template engine to use
-app.engine("handlebars", hbs.engine)
-app.set("view engine", "handlebars")
+// passport auth
+require('./config/passport');
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, "public")))
+app.use(passport.initialize());
+app.use(passport.session());
+
+// LOGS SESSION AND USER ON EACH REQUEST
+// app.use((req, res, next) => {
+//     console.log(req.session);
+//     console.log(req.user);
+//     next();
+// });
 
 app.use(routes)
 
