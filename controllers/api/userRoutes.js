@@ -10,6 +10,7 @@ router.post('/new', async (req, res) => {
         const user = userData.get({plain:true});
         req.logIn(user, (err) => {
             if (err) { return res.status(400).json(err);}
+            User.update({last_login: Date.now()}, {where: { id: user.id }});
             return res.status(200).json(user);
         }); 
 
@@ -20,6 +21,7 @@ router.post('/new', async (req, res) => {
 // LOG IN EXISTING USER
 router.post('/login', passport.authenticate('local'), (req, res) => {
     if(req.user){
+        User.update({last_login: Date.now()}, {where: { id: req.user.id }});
         res.redirect('/users/')
     } else {
         res.json({msg: 'failed to login'})
