@@ -24,6 +24,7 @@ router.get('/signup', (req, res) => {
 // removes user from session and req
 router.get('/logout', (req, res) => {
     req.logout();
+    User.update({last_login: Date.now()}, {where: { id: req.user.id }});
     res.redirect('/users/');
 })
 
