@@ -1,0 +1,16 @@
+<div>
+    <form id="post-form">
+        <input type="hidden" name="post-id" id="post-id" value={{post.id}}> 
+        <div>
+            <label for="subject">Subject</label>
+            <input type="text" name="subject" id="subject" value={{post.subject}}>
+        </div>
+        <div>
+            <label for="content">Content</label>
+            <textarea name="content" id="content" cols="30" rows="10">{{post.content}}</textarea>
+        </div>
+        <button type="submit">Edit Post</button>
+    </form>
+</div>
+
+<script src="/js/editpost.js"></script>
