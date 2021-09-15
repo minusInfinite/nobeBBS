@@ -5,4 +5,5 @@ const topicRoutes = require('./topic-routes')
 router.use('/users', userRoutes);
 router.use('/topic', topicRoutes);
 
+
 module.exports = router;
