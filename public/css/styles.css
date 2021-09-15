@@ -4,11 +4,12 @@
 
 /* Variables */
 :root {
-    --base-color: rgb(132, 24, 165);
-    --hover-color: rgb(153, 27, 59);
-    --link-color: rgb(85, 0, 21);
-    --dark-color: rgb(20, 0, 26);
-    --visit-color: rgb(145, 145, 145);
+    --base-color: rgb(7, 83, 248);
+    --hover-color: rgb(181, 58, 238);
+    --link-color: rgb(128, 5, 185);
+    --dark-color: rgb(38, 13, 136);
+    --bg-color: rgb(0, 0, 0);
+    --visit-color: rgb(45, 43, 78);
 }
 
 html,
@@ -18,7 +19,10 @@ body {
 }
 
 body {
-    background-color: var(--dark-color);
+    background: repeating-linear-gradient(
+        rgb(0, 0, 0) 2px,
+        rgb(70, 70, 70) 5px
+    );
     font-family: "Montserrat", sans-serif;
     color: var(--base-color);
 }
@@ -28,21 +32,32 @@ body {
     margin: 0 auto;
 }
 
-header {
+.header-container {
     position: relative;
+    margin-top: 4rem;
+    padding-bottom: 2rem;
+    background-color: rgb(235, 229, 253);
+    border: 1px solid var(--base-color);
+    border-radius: 1em;
+}
+
+header {
     font-family: "Tourney", cursive;
     margin-top: 0;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0;
 }
 
 header h1 {
-    font-size: 2.5rem;
+    font-size: 4rem;
+    font-weight: 100;
+    margin: 0 auto;
+    padding-left: 1rem;
     padding-bottom: 0.5rem;
 }
 
 nav {
-    position: relative;
-    bottom: 0.5rem;
+    position: absolute;
+    bottom: 0;
 }
 
 nav a {
@@ -75,41 +90,64 @@ section {
     min-width: 80vw;
 }
 
-.container {
+.main-container {
     display: flex;
     flex-wrap: wrap;
     min-width: 100%;
+    margin-top: 4rem;
 }
 
-.container-header,
-.container-row {
+.main-container-header,
+.main-container-row {
     flex: 1 0 100%;
     display: flex;
     justify-content: space-around;
+    background-color: rgb(235, 229, 253);
+    border-radius: 1em;
 }
 
-.container-header span:first-child,
-.container-row span:first-child {
+.main-container-header span:first-child,
+.main-container-row span:first-child {
     flex: 1 1 60%;
 }
 
-.container-header span,
-.container-row span {
+.main-container-header span,
+.main-container-row span {
     width: 20%;
     padding-left: 2rem;
 }
 
-.container-row span {
+.main-container-header span {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.main-container-row span {
     padding-top: 1.5rem;
 }
 
-.container-header span,
-.container-row span {
+.main-container-header span {
+    border-bottom: 3px solid var(--base-color);
+}
+
+.main-container-row span {
     border-bottom: 1px solid var(--base-color);
 }
 
-.container-header span:not(:last-child),
-.container-row span:not(:last-child) {
+.main-container-header span:first-child,
+.main-container-row span:first-child {
+    border-bottom-left-radius: 1rem;
+}
+
+.main-container-header span:last-child,
+.main-container-row span:last-child {
+    border-bottom-right-radius: 1rem;
+}
+
+.main-container-header span:not(:last-child),
+.main-container-row span:not(:last-child) {
     border-right: 1px solid var(--base-color);
 }
 
