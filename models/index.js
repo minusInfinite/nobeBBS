@@ -1,15 +1,4 @@
-const Post = require('./Topic');
+const User = require('./User');
+const Topic = require('./Topic');
 
-User.hasMany(Topic, {
-    foreignKey: 'user_id'
-});
-
-User.hasMany(Comment, {
-    foreignKey: 'user_id'
-});
-
-Post.hasMany(Comment, {
-    foreignKey: 'post_id'
-});
-
-module.exports = { Topic };
+module.exports = {User, Topic}
