@@ -1,26 +1,32 @@
 async function deleteFormHandler(event) {
-  event.preventDefault();
+    event.preventDefault()
 
-  const id = window.location.toString().split('/')[
-      window.location.toString().split('/').length - 1
-    ];
+    const id = window.location.toString().split("/")[
+        window.location.toString().split("/").length - 1
+    ]
 
-  const response = await fetch(`/api/topics/${id}`, {
-      method: 'DELETE',
-      body: JSON.stringify({
-        post_id: id
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    
+    const response = await fetch(`/api/topics/${id}`, {
+        method: "DELETE",
+        body: JSON.stringify({
+            post_id: id,
+        }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+
     if (response.ok) {
-      document.location.replace('/dashboard/');
+        document.location.replace("/dashboard/")
     } else {
-      alert(response.statusText);
+        const errMsg = await response.json((msg) => JSON.parse(msg))
+        if ("errors" in errMsg) {
+            displayModal(errMsg.errors[0].message)
+        } else {
+            displayModal(errMsg)
+        }
     }
-
 }
 
-document.querySelector('.delete-topic-btn').addEventListener('click', deleteFormHandler);
+document
+    .querySelector(".delete-topic-btn")
+    .addEventListener("click", deleteFormHandler)
