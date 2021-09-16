@@ -24,11 +24,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, "public")))
 
-// express session
+/** @type {import("express-session").SessionOptions} */
 const sess = {
     secret: process.env.CSECRET,
     cookie: {
-        maxAge: 1000*60*60*24 // EXPIRES IN 1 DAY(1000ms * 60s * 60m * 24hr = 1 day)
+        maxAge: 1000 * 60 * 60 * 24, // EXPIRES IN 1 DAY(1000ms * 60s * 60m * 24hr = 1 day)
+        sameSite: "strict",
     },
     resave: false,
     saveUninitialized: true,
@@ -40,17 +41,17 @@ const sess = {
 app.use(session(sess))
 
 // passport auth
-require('./config/passport');
+require("./config/passport")
 
-app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.initialize())
+app.use(passport.session())
 
 // LOGS SESSION AND USER ON EACH REQUEST
 app.use((req, res, next) => {
-    console.log(req.session);
-    console.log(req.user);
-    next();
-});
+    console.log(req.session)
+    console.log(req.user)
+    next()
+})
 
 app.use(routes)
 
