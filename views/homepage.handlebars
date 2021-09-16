@@ -1,0 +1,18 @@
+
+<section>
+    <div class="main-container">
+        <div class="main-container-header">
+            <span>Topics</span>
+            <span>Posts</span>
+            <span>Last Post</span>
+        </div>
+        {{#each topics as |topic|}}
+        <div class="main-container-row">
+            <span><a href="/topic/{{topic.id}}">{{topic.title}}</a></span>
+            <span>{{topic.post_count}}</span>
+            <span><a href="/posts/{{topic.post.id}}"></a><br />
+                by
+                {{topic.post.user.name}}<br/>{{topic.post.created_at}}</span>
+        </div>
+    </div>
+</section>
