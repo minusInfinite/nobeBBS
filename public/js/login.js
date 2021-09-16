@@ -1,26 +1,32 @@
-const loginFormHandler = async(event) => {
-
-    event.preventDefault();
+const loginFormHandler = async (event) => {
+    event.preventDefault()
     // get values from form
-    const username = document.querySelector('#username').value.trim();
-    const password = document.querySelector('#password').value.trim();
+    const username = document.querySelector("#username").value.trim()
+    const password = document.querySelector("#password").value.trim()
 
     if (username && password) {
         // call login API
-        const response = await fetch('/api/users/login', {
-            method: 'POST',
-            body: JSON.stringify({username, password}),
-            headers: {'Content-Type': 'application/json'}
-        });
+        const response = await fetch("/api/users/login", {
+            method: "POST",
+            body: JSON.stringify({ username, password }),
+            headers: { "Content-Type": "application/json" },
+        })
 
         if (response.ok) {
-            document.location.replace('/users/');
+            document.location.replace("/users/")
         } else {
-            alert('Failed to log in');
-        };
+            const errMsg = await response.json((msg) => JSON.parse(msg))
+            if ("errors" in errMsg) {
+                displayModal(errMsg.errors[0].message)
+            } else {
+                displayModal(errMsg)
+            }
+        }
+    } else {
+        displayModal("Password Error")
     }
-};
+}
 
 document
-    .querySelector('#login-form')
-    .addEventListener('submit', loginFormHandler);
+    .querySelector("#login-form")
+    .addEventListener("submit", loginFormHandler)

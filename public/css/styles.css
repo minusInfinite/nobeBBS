@@ -1,4 +1,4 @@
-@import "/node_modules/normalize.css/normalize.css";
+@import "normalize.css";
 
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Tourney&display=swap");
 
@@ -8,7 +8,7 @@
     --hover-color: rgb(181, 58, 238);
     --link-color: rgb(128, 5, 185);
     --dark-color: rgb(38, 13, 136);
-    --bg-color: rgb(0, 0, 0);
+    --divbg-color: rgb(235, 229, 253);
     --visit-color: rgb(45, 43, 78);
 }
 
@@ -167,7 +167,7 @@ section {
 }
 
 .modal-container {
-    background-color: var(--base-color);
+    background-color: var(--divbg-color);
     border: 1px solid var(--dark-color);
     box-shadow: 0.25rem 0.25rem 0 -0.1rem rgb(95, 95, 95);
     padding: 0;
@@ -180,12 +180,13 @@ section {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
-    background-color: var(--dark-color);
+    border-bottom: 2px solid var(--dark-color);
+    background-color: var(--divbg-color);
 }
 
 .modal-header h2 {
     padding-left: 1rem;
-    color: var(--base-color);
+    color: var(--dark-color);
     font-size: 1.3rem;
 }
 
@@ -203,7 +204,7 @@ section {
     cursor: pointer;
 }
 
-.modal-content {
+#modal-content {
     padding: 0 1rem;
     font-size: 1.25rem;
 }

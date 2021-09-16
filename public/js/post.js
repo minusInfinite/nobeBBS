@@ -1,26 +1,28 @@
-const postFormHandler = async(event) => {
-
-    event.preventDefault();
+const postFormHandler = async (event) => {
+    event.preventDefault()
     // get values from form
-    const subject = document.querySelector('#subject').value.trim();
-    const content = document.querySelector('#content').value.trim();
+    const subject = document.querySelector("#subject").value.trim()
+    const content = document.querySelector("#content").value.trim()
 
     if (subject && content) {
         // call post api
-        const response = await fetch('/api/posts/new', {
-            method: 'POST',
-            body: JSON.stringify({subject, content}),
-            headers: {'Content-Type': 'application/json'}
-        });
+        const response = await fetch("/api/posts/new", {
+            method: "POST",
+            body: JSON.stringify({ subject, content }),
+            headers: { "Content-Type": "application/json" },
+        })
 
         if (response.ok) {
-            document.location.replace('/posts/');
+            document.location.replace("/posts/")
         } else {
-            alert('Failed to post');
-        };
+            const errMsg = await response.json((msg) => JSON.parse(msg))
+            if ("errors" in errMsg) {
+                displayModal(errMsg.errors[0].message)
+            } else {
+                displayModal(errMsg)
+            }
+        }
     }
-};
+}
 
-document
-    .querySelector('#post-form')
-    .addEventListener('submit', postFormHandler);
+document.querySelector("#post-form").addEventListener("submit", postFormHandler)

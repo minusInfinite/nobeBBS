@@ -1,25 +1,34 @@
 async function newFormHandler(event) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const title = document.querySelector('input[name="topic-title"]').value;
-    const post_text = document.querySelector('textarea[name="topic-text"]').value;
+    const title = document.querySelector('input[name="topic-title"]').value
+    const post_text = document.querySelector(
+        'textarea[name="topic-text"]'
+    ).value
 
     const response = await fetch(`/api/topics`, {
-        method: 'POST',
+        method: "POST",
         body: JSON.stringify({
-        title,
-        post_text
+            title,
+            post_text,
         }),
         headers: {
-        'Content-Type': 'application/json'
-        }
-    });
+            "Content-Type": "application/json",
+        },
+    })
 
     if (response.ok) {
-        document.location.replace('/dashboard/');
+        document.location.replace("/dashboard/")
     } else {
-        alert(response.statusText);
+        const errMsg = await response.json((msg) => JSON.parse(msg))
+        if ("errors" in errMsg) {
+            displayModal(errMsg.errors[0].message)
+        } else {
+            displayModal(errMsg)
+        }
     }
 }
 
-document.querySelector('.new-topic-form').addEventListener('submit', newFormHandler);
+document
+    .querySelector(".new-topic-form")
+    .addEventListener("submit", newFormHandler)
