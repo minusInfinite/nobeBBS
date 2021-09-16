@@ -5,6 +5,7 @@ const session = require("express-session")
 const exphbs = require("express-handlebars")
 const routes = require("./controllers")
 const helpers = require("./utils/helpers")
+const makeAdmin = require("./utils/makeAdmin")
 
 const sequelize = require("./config/connection")
 const passport = require("passport")
@@ -44,7 +45,6 @@ require("./config/passport")
 
 app.use(passport.initialize())
 app.use(passport.session())
-
 app.use(routes)
 
 sequelize.sync({ force: false }).then(() => {

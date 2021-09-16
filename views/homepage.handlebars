@@ -1,4 +1,3 @@
-
 <section>
     <div class="main-container">
         <div class="main-container-header">
@@ -7,12 +6,25 @@
             <span>Last Post</span>
         </div>
         {{#each topics as |topic|}}
-        <div class="main-container-row">
-            <span><a href="/topic/{{topic.id}}">{{topic.title}}</a></span>
-            <span>{{topic.post_count}}</span>
-            <span><a href="/posts/{{topic.post.id}}"></a><br />
-                by
-                {{topic.post.user.name}}<br/>{{topic.post.created_at}}</span>
-        </div>
+            {{log topic.posts}}
+            <div class="main-container-row">
+                <span><a href="/topic/{{topic.id}}">{{topic.subject}}</a></span>
+                <span>{{topic.post_count}}</span>
+                {{#if topic.posts}}
+                    {{#each topic.posts as |post|}}
+                        <span><a
+                                href="/post/{{post.id}}"
+                            >{{post.subject}}</a><br />
+                            by
+                            {{post.user.username}}<br />{{format_date
+                                post.createdAt
+                            }}
+                        </span>
+                    {{/each}}
+                {{else}}
+                    <span></span>
+                {{/if}}
+            </div>
+        {{/each}}
     </div>
 </section>
