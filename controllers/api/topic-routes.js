@@ -1,36 +1,30 @@
 const router = require('express').Router();
-const { Topic, User,} = require('../../models');
-const withAuth = require('../middleware/auth');
+const { Topic, Post, User} = require('../../models');
+const {isAuth, isAdmin} = require('../middleware/auth');
 const sequelize = require('../../config/connection');
 
-
+// GET ALL TOPICS
 router.get('/', (req, res) => {
     console.log('======================');
-    Post.findAll({
-
+    Topic.findAll({
+      // INCLUDE ALL POSTS THAT BELONG TO TOPIC
       attributes: ['id', 
-                   'topic_text',
-                   'title',
-                   'created_at'
+                   'subject',
+                   'created_at',
+                  [sequelize.fn('COUNT', sequelize.col('posts.id')), 'postCount']
                 ],
-
-      order: [['created_at', 'DESC']],
-  
       include: [
-    
           {
-            model: Comment,
-            attributes: ['id', 'comment_text', 'topic_id', 'user_id', 'created_at'],
+            model: Post,
+            // INCLUDE ALL USERS THAT BELONG TO POST
             include: {
               model: User,
               attributes: ['username']
-            }
+            },
           },
-          {
-            model: User,
-            attributes: ['username']
-          },
-      ]
+      ],
+      order: [[Post, 'created_at', 'DESC']],
+      group: ['Topic.id']
     }) 
         .then(dbPostData => res.json(dbPostData))
         .catch(err => {
@@ -40,30 +34,27 @@ router.get('/', (req, res) => {
   
 });
 
+// FIND ONE TOPIC BY ID
 router.get('/:id', (req, res) => {
-    Post.findOne({
+    Topic.findOne({
       where: {
         id: req.params.id
       },
       attributes: ['id', 
-                   'topic_text', 
-                   'title',
+                   'subject',
                    'created_at'
                 ],
+      // INCLUDE ALL POSTS THAT BELONG TO TOPIC
       include: [
         {
-          model: User,
-          attributes: ['username']
-        },
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'topic_id', 'user_id', 'created_at'],
+          model: Post,
+          // INCLUDE ALL USERS THAT BELONG TO POST
           include: {
             model: User,
             attributes: ['username']
           }
-        }
-      ]
+        },
+    ]
     })
       .then(dbPostData => {
         if (!dbPostData) {
@@ -78,12 +69,10 @@ router.get('/:id', (req, res) => {
       });
   });
 
-
-router.post('/', withAuth, (req, res) => {
-    Post.create({ 
-        title: req.body.title,
-        post_text: req.body.post_text,
-        user_id: req.session.user_id
+// CREATE A TOPIC, MUST BE LOGGED IN AS ADMIN
+router.post('/', isAdmin, (req, res) => {
+    Topic.create({ 
+        subject: req.body.subject
     })
         .then(dbPostData => res.json(dbPostData))
         .catch(err => {
@@ -92,11 +81,10 @@ router.post('/', withAuth, (req, res) => {
         });
 });
 
-
-router.put('/:id', withAuth, (req, res) => {
-    Post.update({
-        title: req.body.title,
-        post_text: req.body.post_text
+// EDIT A TOPIC, MUST BE LOGGED IN AS ADMIN
+router.put('/:id', isAdmin, (req, res) => {
+    Topic.update({
+        subject: req.body.subject
       },
       {
         where: {
@@ -115,8 +103,9 @@ router.put('/:id', withAuth, (req, res) => {
     });
 });
 
-router.delete('/:id', withAuth, (req, res) => {
-    Post.destroy({
+// DELETE TOPIC, MUST BE LOGGED IN AS ADMIN
+router.delete('/:id', isAdmin, (req, res) => {
+    Topic.destroy({
         where: {
             id: req.params.id 
         }

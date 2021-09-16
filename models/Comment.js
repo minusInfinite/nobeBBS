@@ -19,20 +19,20 @@ Comment.init(
         }
     },
     user_id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
         allowNull: false,
         references: {
-            model: 'user',
-            key: 'id'
-            }
+          model: 'user',
+          key: 'id'
+        }
     },
     post_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    references: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
         model: 'post',
         key: 'id'
-        }
+      }
     }
   },
   {
