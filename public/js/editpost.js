@@ -7,7 +7,7 @@ const postFormHandler = async (event) => {
 
     if (postId && subject && content) {
         // call post api
-        const url = "/api/posts/edit/" + postId
+        const url = "/api/post/edit/" + postId
         const response = await fetch(url, {
             method: "POST",
             body: JSON.stringify({ subject, content }),

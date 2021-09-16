@@ -6,14 +6,14 @@ const postFormHandler = async (event) => {
 
     if (subject && content) {
         // call post api
-        const response = await fetch("/api/posts/new", {
+        const response = await fetch("/api/post/", {
             method: "POST",
             body: JSON.stringify({ subject, content }),
             headers: { "Content-Type": "application/json" },
         })
 
         if (response.ok) {
-            document.location.replace("/posts/")
+            window.history.back()
         } else {
             const errMsg = await response.json((msg) => JSON.parse(msg))
             if ("errors" in errMsg) {

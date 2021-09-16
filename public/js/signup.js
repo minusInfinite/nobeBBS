@@ -12,14 +12,14 @@ const signupFormHandler = async (event) => {
         } else {
             body = { username, password, is_admin: 0 }
         }
-        const response = await fetch("/api/users/new", {
+        const response = await fetch("/api/user/", {
             method: "POST",
             body: JSON.stringify(body),
             headers: { "Content-Type": "application/json" },
         })
 
         if (response.ok) {
-            document.location.replace("/users/")
+            document.location.replace("/")
         } else {
             const errMsg = await response.json((msg) => JSON.parse(msg))
             if ("errors" in errMsg) {
