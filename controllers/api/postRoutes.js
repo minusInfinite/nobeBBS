@@ -7,6 +7,9 @@ router.get('/', async (req, res) => {
             const posts = await Post.findAll({
                 where: {
                     topic_id: req.query.t
+                },
+                include: {
+                    model: Comment
                 }
             })
         res.status(200).json(posts);
