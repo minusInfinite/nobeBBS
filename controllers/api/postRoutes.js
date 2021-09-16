@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, Comment } = require('../../models');
 
 // get all posts where ?t=TOPIC_ID
 router.get('/', async (req, res) => {
@@ -8,9 +8,12 @@ router.get('/', async (req, res) => {
                 where: {
                     topic_id: req.query.t
                 },
-                include: {
-                    model: Comment
-                }
+                include: [
+                    {
+                        model: Comment
+                    }
+                ]
+
             })
         res.status(200).json(posts);
     } catch (error) {
