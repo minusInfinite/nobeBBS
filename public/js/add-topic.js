@@ -6,7 +6,7 @@ async function newFormHandler(event) {
         'textarea[name="topic-text"]'
     ).value
 
-    const response = await fetch(`/api/topics`, {
+    const response = await fetch(`/api/topic`, {
         method: "POST",
         body: JSON.stringify({
             title,
@@ -18,7 +18,7 @@ async function newFormHandler(event) {
     })
 
     if (response.ok) {
-        document.location.replace("/dashboard/")
+        window.history.back()
     } else {
         const errMsg = await response.json((msg) => JSON.parse(msg))
         if ("errors" in errMsg) {
