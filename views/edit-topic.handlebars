@@ -1,0 +1,32 @@
+<article>
+    <a href="/dashboard"> %larr; Back to the Hompage</a>
+    <h2>
+        Edit Post
+    </h2>
+    <form class="edit-topic-form">
+        <div>
+            <input name="topic-title" type="text" size="60" value="{{topic.title}}">
+        </div>
+        <div>
+            <textarea name="topic-text" type="text">{{topic.topic_text}}</textarea>
+        </div>
+        <div>
+            <button type="submit">Save Topic</button>
+            <button type="button" class="delete-Topic-btn">Delete Topic</button>
+        </div>
+    </form>
+</article>
+
+<form class="comment-form">
+    <div>
+        <textarea name="comment-body"></textarea>
+    </div>
+    <div>
+        <button type="Submit">Add Comment</button>
+    </div>
+</form>
+
+{{> comments post.comments}}
+
+<script src="/public/js/edit-topic.js"></script>
+<script src="/public/js/delete-topic.js"></script>

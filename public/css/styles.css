@@ -1,0 +1,209 @@
+@import "/node_modules/normalize.css/normalize.css";
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Tourney&display=swap");
+
+/* Variables */
+:root {
+    --base-color: rgb(7, 83, 248);
+    --hover-color: rgb(181, 58, 238);
+    --link-color: rgb(128, 5, 185);
+    --dark-color: rgb(38, 13, 136);
+    --bg-color: rgb(0, 0, 0);
+    --visit-color: rgb(45, 43, 78);
+}
+
+html,
+body {
+    min-height: 100vw;
+    min-width: 90vw;
+}
+
+body {
+    background: repeating-linear-gradient(
+        rgb(0, 0, 0) 2px,
+        rgb(70, 70, 70) 5px
+    );
+    font-family: "Montserrat", sans-serif;
+    color: var(--base-color);
+}
+
+.wrap {
+    width: 80vw;
+    margin: 0 auto;
+}
+
+.header-container {
+    position: relative;
+    margin-top: 4rem;
+    padding-bottom: 2rem;
+    background-color: rgb(235, 229, 253);
+    border: 1px solid var(--base-color);
+    border-radius: 1em;
+}
+
+header {
+    font-family: "Tourney", cursive;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+header h1 {
+    font-size: 4rem;
+    font-weight: 100;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-bottom: 0.5rem;
+}
+
+nav {
+    position: absolute;
+    bottom: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+nav a:hover {
+    color: var(--hover-color);
+}
+
+nav ul {
+    margin: 0;
+    padding: 0.5rem 1rem;
+}
+
+nav li {
+    list-style: none;
+    display: inline-block;
+    font-weight: 600;
+    padding: 0;
+}
+
+nav li:not(:last-child)::after {
+    content: " ● ";
+    margin: 0 0.5em;
+}
+
+section {
+    min-width: 80vw;
+}
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    min-width: 100%;
+    margin-top: 4rem;
+}
+
+.main-container-header,
+.main-container-row {
+    flex: 1 0 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(235, 229, 253);
+    border-radius: 1em;
+}
+
+.main-container-header span:first-child,
+.main-container-row span:first-child {
+    flex: 1 1 60%;
+}
+
+.main-container-header span,
+.main-container-row span {
+    width: 20%;
+    padding-left: 2rem;
+}
+
+.main-container-header span {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.main-container-row span {
+    padding-top: 1.5rem;
+}
+
+.main-container-header span {
+    border-bottom: 3px solid var(--base-color);
+}
+
+.main-container-row span {
+    border-bottom: 1px solid var(--base-color);
+}
+
+.main-container-header span:first-child,
+.main-container-row span:first-child {
+    border-bottom-left-radius: 1rem;
+}
+
+.main-container-header span:last-child,
+.main-container-row span:last-child {
+    border-bottom-right-radius: 1rem;
+}
+
+.main-container-header span:not(:last-child),
+.main-container-row span:not(:last-child) {
+    border-right: 1px solid var(--base-color);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-container {
+    background-color: var(--base-color);
+    border: 1px solid var(--dark-color);
+    box-shadow: 0.25rem 0.25rem 0 -0.1rem rgb(95, 95, 95);
+    padding: 0;
+    height: 65%;
+    width: 50%;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    background-color: var(--dark-color);
+}
+
+.modal-header h2 {
+    padding-left: 1rem;
+    color: var(--base-color);
+    font-size: 1.3rem;
+}
+
+.modal-header .modal-close {
+    color: var(--base-color);
+    margin-right: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.modal-header .modal-close:hover,
+.modal-header .modal-close:focus {
+    color: var(--hover-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content {
+    padding: 0 1rem;
+    font-size: 1.25rem;
+}
