@@ -20,6 +20,14 @@ Post.init(
             type: DataTypes.STRING,
             allowNull: false
         },
+        topic_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'topic',
+                key: 'id'
+            }
+        },
         user_id: {
             type: DataTypes.UUID,
             allowNull: false,
