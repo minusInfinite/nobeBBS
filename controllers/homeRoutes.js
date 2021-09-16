@@ -31,11 +31,9 @@ router.get("/", async (req, res) => {
         })
 
         const topics = topicData.map((topic) => topic.get({ plain: true }))
-        console.log(req.session)
         res.render("homepage", {
             topics,
-            logged_in: req.session.logged_in,
-            is_admin: req.session.is_admin,
+            user: req.user,
         })
     } catch (err) {
         console.log(err)
@@ -75,8 +73,17 @@ router.get("/topics/:id", (req, res) => {
         })
 })
 
+router.get("/signup", (req, res) => {
+    if (req.user) {
+        res.redirect("/")
+        return
+    }
+
+    res.render("signup")
+})
+
 router.get("/login", (req, res) => {
-    if (req.session.logged_in) {
+    if (req.user) {
         res.redirect("/")
         return
     }
