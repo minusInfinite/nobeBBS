@@ -1,7 +1,7 @@
-const {Model, DataTypes} = require('sequelize');
-const sequelize = require('../config/connection');
+const { Model, DataTypes } = require("sequelize")
+const sequelize = require("../config/connection")
 
-class Post extends Model {};
+class Post extends Model {}
 
 Post.init(
     {
@@ -10,40 +10,40 @@ Post.init(
             allowNull: false,
             primaryKey: true,
             unique: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         subject: {
             type: DataTypes.STRING(50),
-            allowNull: false
+            allowNull: false,
         },
         content: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.TEXT,
+            allowNull: false,
         },
         topic_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
-                model: 'topic',
-                key: 'id'
-            }
+                model: "topic",
+                key: "id",
+            },
         },
         user_id: {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: 'user',
-                key: 'id'
-            }
-        }
+                model: "user",
+                key: "id",
+            },
+        },
     },
     {
         sequelize,
         timestamps: true,
         freezeTableName: true,
         underscored: true,
-        modelName: 'post'
+        modelName: "post",
     }
-);
+)
 
-module.exports = Post;
+module.exports = Post
