@@ -21,7 +21,6 @@
                 <span>{{post.reply_count}}</span>
                 {{#if post.comments}}
                     {{#each post.comments as |comment|}}
-                        {{log comment}}
                         <span><a
                                 href="/topic/{{post.topic_id}}/post/{{post.id}}/#comment{{comment.id}}"
                             >Last Reply</a><br />
