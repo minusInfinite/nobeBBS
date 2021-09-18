@@ -1,0 +1,60 @@
+<section>
+    <div class="main-container">
+        {{log post}}
+        {{log topic}}
+        {{log comments}}
+        <div class="main-container-header" id="top">
+            <span>
+                <ul>
+                    <li><a href="/">Topics</a></li>
+                    <li><a href="/topic/{{topic.id}}">{{topic.subject}}</a></li>
+                    <li>{{post.subject}}</li>
+                </ul>
+            </span>
+        </div>
+        <div class="post-container-row">
+            <span>
+                Posted by
+                {{post.user.username}}
+                <a href="#"><img
+                        src="/{{post.user.avatar}}"
+                        alt="{{post.user.username}}'s avatar"
+                    />
+                </a><br />{{format_datetime post.createdAt}}</span>
+            <div class="post-container-buttons">
+                <button id="quote" data-post="{{post.id}}">Quote</button>
+                <button id="reply" data-post="{{post.id}}">Reply</button>
+            </div>
+            <span>
+                <p>{{{post.content}}}</p>
+            </span>
+        </div>
+        {{#if comments}}
+            {{#each comments as |comment|}}
+                <div class="post-container-row" id="comment{{comment.id}}">
+                    <span>
+                        Posted by
+                        {{comment.user.username}}
+                        <a href="#"><img
+                                src="/{{comment.user.avatar}}"
+                                alt="{{comment.user.username}}'s avatar"
+                            />
+                        </a><br />{{format_datetime comment.createdAt}}</span>
+                    <div class="post-container-buttons">
+                        <button
+                            id="quote"
+                            data-post="{{post.id}}"
+                        >Quote</button>
+                        <button
+                            id="reply"
+                            data-post="{{post.id}}"
+                        >Reply</button>
+                    </div>
+                    <span>
+                        <p>{{{comment.comment_text}}}</p>
+                    </span>
+                </div>
+            {{/each}}
+        {{/if}}
+    </div>
+</section>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/styles.css" />
     <title>NodeBBS</title>
 </head>
@@ -26,37 +27,93 @@
             </nav>
         </div>
         <main>
-            <!-- <section>
+            <section>
                 <div class="main-container">
-                    <div class="main-container-header">
-                        <span>Topics</span>
-                        <span>Posts</span>
-                        <span>Last Post</span>
+                    <div class="main-container-header" id="top">
+                        <span>
+                            <ul>
+                                <li><a href="/">Topics</a></li>
+                                <li><a href="/topic/topic.id">Topic Subject</a></li>
+                                <li>post subject</li>
+                            </ul>
+                        </span>
                     </div>
-                    <div class="main-container-row">
-                        <span>Lorem ipsum dolor sit amet</span>
-                        <span> 3</span>
-                        <span><a href="#">Lorem ipsum dolor sit amet</a><br />
-                            by <a href>User</a><br />Tue Sept 14, 2021 8:00
-                            pm</span>
+                    <div class="post-container-row">
+                        <span>
+                            Posted by User <a href="#"><img src="img/default_avatar.png" alt=""> </a><br />Tue
+                            Sept
+                            14 2021 8:00 pm
+                        </span>
+                        <div class="post-container-buttons">
+                            <button id="quote">Quote</button>
+                            <button id="reply">Reply</button>
+                        </div>
+                        <span>
+                            <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
+                                labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
+                                animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
+                                aliquip amet voluptate voluptate dolor minim nulla est proident.</p>
+                            <p>
+                                Nostrud officia
+                                pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
+                                commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
+                                proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
+                                eiusmod.</p>
+                            <p>
+                                Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
+                                Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
+                                culpa duis.</p>
+                        </span>
                     </div>
-                    <div class="main-container-row">
-                        <span>Lorem ipsum dolor sit amet</span>
-                        <span> 3</span>
-                        <span><a href="#">Lorem ipsum dolor sit amet</a><br />
-                            by <a href>User</a><br />Tue Sept 14, 2021 8:00
-                            pm</span>
+                    <div class="post-container-row">
+                        <span>Comment by <a href>User</a><br />Tue Sept 14, 2021 8:00 pm</span>
+                        <div class="post-container-buttons">
+                            <button id="quote">Quote</button>
+                            <button id="reply">Reply</button>
+                        </div>
+                        <span>
+                            <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
+                                labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
+                                animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
+                                aliquip amet voluptate voluptate dolor minim nulla est proident.</p>
+                            <p>
+                                Nostrud officia
+                                pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
+                                commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
+                                proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
+                                eiusmod.</p>
+                            <p>
+                                Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
+                                Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
+                                culpa duis.</p>
+                        </span>
                     </div>
-                    <div class="main-container-row">
-                        <span>Lorem ipsum dolor sit amet</span>
-                        <span> 3</span>
-                        <span><a href="#">Lorem ipsum dolor sit amet</a><br />
-                            by <a href>User</a><br />Tue Sept 14, 2021 8:00
-                            pm</span>
+                    <div class="post-container-row">
+                        <span>Comment by <a href>User</a><br />Tue Sept 14, 2021 8:00 pm</span>
+                        <div class="post-container-buttons">
+                            <button id="quote">Quote</button>
+                            <button id="reply">Reply</button>
+                        </div>
+                        <span>
+                            <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
+                                labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
+                                animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
+                                aliquip amet voluptate voluptate dolor minim nulla est proident.</p>
+                            <p>
+                                Nostrud officia
+                                pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
+                                commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
+                                proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
+                                eiusmod.</p>
+                            <p>
+                                Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
+                                Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
+                                culpa duis.</p>
+                        </span>
                     </div>
                 </div>
-            </section> -->
-            <section class="user-form main-container">
+            </section>
+            <!-- <section class="user-form main-container">
                 <form id="login-form">
                     <fieldset>
                         <legend>Login</legend>
@@ -68,7 +125,7 @@
                         <input type="submit" value="Login">
                     </fieldset>
                 </form>
-            </section>
+            </section> -->
         </main>
     </div>
     <!-- The below is hidden by default -->
@@ -83,7 +140,6 @@
             </div>
         </div>
     </div>
-    <script src="./js/scripts.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,40 @@
+<section>
+    <div class="main-container">
+        <div class="main-container-header">
+            <span>Posts</span>
+            <span>Replys</span>
+            <span>Last Reply</span>
+        </div>
+        {{#each posts as |post|}}
+            <div class="main-container-row">
+                <span>
+                    <a
+                        href="/topic/{{post.topic_id}}/post/{{post.id}}"
+                    >{{post.subject}}</a>
+                    <br />
+                    Posted by
+                    {{post.user.username}}
+                    on
+                    {{format_datetime post.createdAt}}
+
+                </span>
+                <span>{{post.reply_count}}</span>
+                {{#if post.comments}}
+                    {{#each post.comments as |comment|}}
+                        {{log comment}}
+                        <span><a
+                                href="/topic/{{post.topic_id}}/post/{{post.id}}/#comment{{comment.id}}"
+                            >Last Reply</a><br />
+                            by
+                            {{comment.user.username}}<br />{{format_datetime
+                                comment.createdAt
+                            }}
+                        </span>
+                    {{/each}}
+                {{else}}
+                    <span></span>
+                {{/if}}
+            </div>
+        {{/each}}
+    </div>
+</section>

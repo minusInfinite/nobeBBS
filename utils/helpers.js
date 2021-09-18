@@ -9,6 +9,9 @@ module.exports = {
     format_date: (date) => {
         return date.toLocaleDateString()
     },
+    format_datetime: (date) => {
+        return date.toLocaleString()
+    },
     equal: () => {
         return reduceOp(arguments, (a, b) => a === b)
     },
