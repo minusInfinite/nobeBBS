@@ -61,16 +61,6 @@ nav {
     bottom: 0;
 }
 
-a {
-    text-decoration: none;
-    color: var(--link-color);
-}
-
-a:hover,
-a:focus {
-    color: var(--hover-color);
-}
-
 nav ul {
     margin: 0;
     padding: 0.5rem 1rem;
@@ -88,6 +78,16 @@ nav li:not(:last-child)::after {
     margin: 0 0.5em;
 }
 
+a {
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+a:hover,
+a:focus {
+    color: var(--hover-color);
+}
+
 main {
     background-color: var(--dark-color);
     border-radius: 1rem;
@@ -95,6 +95,21 @@ main {
 
 section {
     min-width: 80vw;
+}
+
+footer {
+    position: relative;
+    margin-bottom: 2rem;
+    background-color: rgb(235, 229, 253);
+    border: 1px solid var(--base-color);
+    border-radius: 1em;
+}
+
+.user-last-login {
+    margin: 0 auto;
+    font-style: italic;
+    font-size: 0.8rem;
+    padding: 0.5em 1em;
 }
 
 .main-container {

@@ -33,6 +33,16 @@
             <main>
                 {{{body}}}
             </main>
+            {{#if user.last_login}}
+                <footer>
+                    <div class="user-last-login">
+                        <span>Welcome back
+                            {{user.username}}
+                            you last logged in
+                            {{format_datetime user.last_login}}</span>
+                    </div>
+                </footer>
+            {{/if}}
         </div>
         <div id="modal" class="modal">
             <div class="modal-container">
