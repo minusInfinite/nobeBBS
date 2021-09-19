@@ -90,6 +90,7 @@ nav li:not(:last-child)::after {
 
 main {
     background-color: var(--dark-color);
+    border-radius: 1rem;
 }
 
 section {

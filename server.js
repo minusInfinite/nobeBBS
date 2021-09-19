@@ -46,8 +46,10 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(routes)
 
-app.get("*", (req, res) => {
-    res.status(404).render("404")
+app.use("*", (req, res) => {
+    res.status(404).render("404", {
+        user: req.user,
+    })
 })
 
 sequelize.sync({ force: false }).then(() => {
