@@ -1,6 +1,7 @@
 const router = require("express").Router()
 const passport = require("passport")
 const { User } = require("../../models")
+const { isAdmin, isAuth } = require("../middleware/auth")
 
 // CREATE A NEW USER
 router.post("/", async (req, res) => {
@@ -30,7 +31,7 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
     }
 })
 
-router.patch("/updatepass", async (req, res) => {
+router.patch("/updatepass", isAuth, async (req, res) => {
     try {
         if (req.user) {
             const user = await User.findByPk(req.user.id, { plain: true })
@@ -56,7 +57,33 @@ router.patch("/updatepass", async (req, res) => {
     }
 })
 
-router.patch("/updateavatar", async (req, res) => {
+router.patch("/setadmin", isAuth, isAdmin, async (req, res) => {
+    try {
+        const user = await User.findByPk(req.body.id, {
+            attributes: ["id", "is_admin"],
+            plain: true,
+        })
+
+        const adminStatus = user.is_admin
+
+        if (!adminStatus) {
+            user.is_admin = true
+            await user.save({ hooks: false })
+        } else {
+            user.is_admin = false
+            await user.save({ hooks: false })
+        }
+
+        res.status(200).json(user)
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            errors: [{ message: err }],
+        })
+    }
+})
+
+router.patch("/updateavatar", isAuth, async (req, res) => {
     try {
         if (req.user) {
             const user = await User.findByPk(req.user.id, { plain: true })
