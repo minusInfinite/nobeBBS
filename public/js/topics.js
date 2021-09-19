@@ -5,38 +5,33 @@
 function showForm(event) {
     event.stopPropagation()
 
-    const postForm = document.querySelector(".post-form")
-    postForm.style.display = "flex"
+    const topicForm = document.querySelector(".topic-form")
+    topicForm.style.display = "flex"
 
     submitTopic()
 }
 
 function submitTopic() {
-    const postForm = document.querySelector(".post-form")
-    const postSubject = document.querySelector("#post-subject")
-    const postContent = document.querySelector("#post-content")
+    const topicForm = document.querySelector(".topic-form")
+    const topicSubject = document.querySelector("#topic-subject")
     const submitBtn = document.querySelector("input[value='Submit']")
     const dismissBtn = document.querySelector("input[value='Dismiss']")
 
     dismissBtn.onclick = () => {
-        console.log(postSubject)
-        postSubject.value = ""
-        postForm.style.display = "none"
+        console.log(topicSubject)
+        topicSubject.value = ""
+        topicForm.style.display = "none"
     }
 
     submitBtn.addEventListener("click", async (event) => {
         event.preventDefault()
         event.stopPropagation()
-        const subject = postSubject.value
-        const content = postContent.value
-        const topic_id = window.location.pathname.toString().split("/")[
-            window.location.pathname.toString().split("/").length - 1
-        ]
+        const subject = topicSubject.value
 
         try {
-            const response = await fetch("/api/post/", {
+            const response = await fetch("/api/topic/", {
                 method: "POST",
-                body: JSON.stringify({ subject, content, topic_id }),
+                body: JSON.stringify({ subject }),
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -58,4 +53,4 @@ function submitTopic() {
     })
 }
 
-document.querySelector("#add-post").addEventListener("click", showForm)
+document.querySelector("#add-topic").addEventListener("click", showForm)

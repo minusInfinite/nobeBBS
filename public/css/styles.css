@@ -103,6 +103,69 @@ section {
     margin-top: 4rem;
 }
 
+.add-btn,
+.delete-btn {
+    position: relative;
+    display: inline;
+    border: none;
+    float: right;
+    margin-right: 1rem;
+    border-radius: 50%;
+    max-height: 1.05em;
+    height: 1.05em;
+    max-width: 1.05em;
+    width: 1.05em;
+    cursor: pointer;
+    pointer-events: auto;
+    background-color: var(--dark-color);
+}
+
+.add-btn::after,
+.add-btn::before {
+    background-color: #fff;
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    transform-origin: center;
+}
+
+.delete-btn::after,
+.delete-btn::before {
+    background-color: #fff;
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    transform-origin: center;
+}
+
+.add-btn::after,
+.delete-btn::after {
+    height: 50%;
+    width: 2px;
+}
+
+.add-btn::before,
+.delete-btn::before {
+    height: 2px;
+    width: 50%;
+}
+
+.add-btn::after {
+    height: 50%;
+    width: 2px;
+}
+
+.add-btn::before {
+    height: 2px;
+    width: 50%;
+}
+
 .main-container-header,
 .main-container-row,
 .post-container-row {
@@ -234,18 +297,9 @@ section {
 }
 
 /* forms */
-.post-form form {
-    display: flex;
-    flex-direction: column;
-    width: 80vw;
-    height: 5em;
-}
 
-.post-form form {
-    width: 80vw;
-    margin-top: 1rem;
-}
-
+.topic-form,
+.post-form,
 .comment-form {
     display: none;
     width: 100%;
@@ -253,6 +307,7 @@ section {
     margin: 0;
 }
 
+.topic-form form,
 .comment-form form,
 .post-form form {
     display: block;
@@ -261,6 +316,7 @@ section {
     margin: 0;
 }
 
+.topic-form fieldset,
 .comment-form fieldset,
 .post-form fieldset {
     background-color: var(--base-color);
@@ -269,9 +325,19 @@ section {
     padding: 1rem;
 }
 
+.post-form form label,
+.topic-form form label,
 .comment-form form label {
     font-weight: 600;
     color: var(--light-color);
+}
+
+.post-form input[type="text"],
+.topic-form input[type="text"],
+.post-form input[type="text"] {
+    width: 100%;
+    margin: 0.8rem 0;
+    height: 1.5rem;
 }
 
 .comment-form textarea,
@@ -281,11 +347,17 @@ section {
     height: 10rem;
 }
 
-.comment-form textarea:focus,
-.post-form textarea:focus {
+.topic-form input[type="text"]:focus,
+.post-form input[type="text"]:focus,
+.post-form textarea:focus,
+.comment-form textarea:focus {
     border: 2px solid var(--dark-color);
 }
 
+.post-form input[type="submit"],
+.post-form input[type="button"],
+.topic-form input[type="submit"],
+.topic-form input[type="button"],
 .comment-form input[type="submit"],
 .comment-form input[type="button"] {
     background-color: var(--dark-color);
@@ -298,6 +370,14 @@ section {
     transition: color, background-color 0.25s ease-in;
 }
 
+.post-form input[type="submit"]:hover,
+.post-form input[type="submit"]:focus,
+.post-form input[type="button"]:hover,
+.post-form input[type="button"]:focus,
+.topic-form input[type="submit"]:hover,
+.topic-form input[type="submit"]:focus,
+.topic-form input[type="button"]:hover,
+.topic-form input[type="button"]:focus,
 .comment-form form input[type="button"]:hover,
 .comment-form form input[type="button"]:focus,
 .comment-form form input[type="submit"]:hover,
@@ -338,8 +418,7 @@ section {
     font-weight: 600;
 }
 
-.user-form form input,
-.post-form form input {
+.user-form form input {
     width: 100%;
     margin-bottom: 1rem;
     padding: 0.5rem;
@@ -351,9 +430,7 @@ section {
 }
 
 /* All Form Button Styles */
-.user-form form input[type="submit"],
-.post-form input[type="submit"],
-.post-form input[type="button"] {
+.user-form form input[type="submit"] {
     background-color: var(--dark-color);
     color: var(--link-color);
     font-weight: 600;
@@ -365,11 +442,7 @@ section {
 }
 
 .user-form form input[type="submit"]:hover,
-.user-form form input[type="submit"]:focus,
-.post-form input[type="submit"]:hover,
-.post-form input[type="submit"]:focus,
-.post-form input[type="button"]:hover,
-.post-form input[type="button"]:focus {
+.user-form form input[type="submit"]:focus {
     background-color: var(--divgb-color);
     color: var(--hover-color);
     border: 2px solid var(--base-color);

@@ -1,4 +1,4 @@
-<section id="post-template">
+<section>
     <div class="main-container">
         <div class="main-container-header" id="top">
             <span>
@@ -9,60 +9,63 @@
                 </ul>
             </span>
         </div>
-        <div class="post-container-row">
-            <span>
-                Posted by
-                {{post.user.username}}
-                <a href="#"><img src="/{{post.poster.avatar}}" alt="{{post.poser.username}}'s avatar" />
-                </a><br />{{format_datetime post.createdAt}}</span>
-            {{#if user}}
-            <div class="post-container-buttons">
-                <button id="quote-post" data-post="{{post.id}}">Quote</button>
-                <button id="reply-post" data-post="{{post.id}}">Reply</button>
+        <section id="post-template">
+            <div class="post-container-row">
+                <span>
+                    Posted by
+                    {{post.poster.username}}
+                    <a href="#"><img src="{{post.poster.avatar}}" alt="{{post.poster.username}}'s avatar" />
+                    </a><br />{{format_datetime post.createdAt}}</span>
+                {{#if user}}
+                <div class="post-container-buttons">
+                    <button id="quote-post" data-post="{{post.id}}">Quote</button>
+                    <button id="reply-post" data-post="{{post.id}}">Reply</button>
+                </div>
+                {{/if}}
+                <span>
+                    <pre>{{{post.content}}}</pre>
+                </span>
             </div>
-            {{/if}}
-            <span>
-                <pre>{{{post.content}}}</pre>
-            </span>
-        </div>
-        <div class="comment-form">
-            <form>
-                <fieldset>
-                    <label for="comment-body">Post Reply</label>
-                    <textarea id="comment-body" name="comment-body"></textarea>
-                    <input type="submit" value="Sumbit">
-                    <input type="button" value="Dismiss">
-                </fieldset>
-            </form>
-        </div>
-        {{#each comments as |comment| }}
-        <div class="post-container-row" id="comment{{comment.id}}">
-            <span>
-                Posted by
-                {{comment.commentor.username}}
-                <a href="#"><img src="/{{comment.commentor.avatar}}" alt="{{comment.commentor.username}}'s avatar" />
-                </a><br />{{format_datetime comment.createdAt}}</span>
-            {{#if ../user}}
-            <div class="post-container-buttons">
-                <button id="quote-comment{{comment.id}}">Quote</button>
-                <button id="reply-comment{{comment.id}}">Reply</button>
+            <div class="comment-form">
+                <form>
+                    <fieldset>
+                        <label for="comment-body">Post Reply</label>
+                        <textarea id="comment-body" name="comment-body"></textarea>
+                        <input type="submit" value="Submit">
+                        <input type="button" value="Dismiss">
+                    </fieldset>
+                </form>
             </div>
-            {{/if}}
-            <span>
-                <pre>{{{comment.comment_text}}}</pre>
-            </span>
-        </div>
-        <div class="comment-form">
-            <form>
-                <fieldset>
-                    <label for="comment-body">Post Reply</label>
-                    <textarea id="comment-body" name="comment-body" data-post="{{../post.id}}"></textarea>
-                    <input type="submit" value="Sumbit">
-                    <input type="button" value="Dismiss">
-                </fieldset>
-            </form>
-        </div>
-        {{/each}}
+            {{#each comments as |comment| }}
+            <div class="post-container-row" id="comment{{comment.id}}">
+                <span>
+                    Posted by
+                    {{comment.commentor.username}}
+                    <a href="#"><img src="{{comment.commentor.avatar}}"
+                            alt="{{comment.commentor.username}}'s avatar" />
+                    </a><br />{{format_datetime comment.createdAt}}</span>
+                {{#if ../user}}
+                <div class="post-container-buttons">
+                    <button id="quote-comment{{comment.id}}">Quote</button>
+                    <button id="reply-comment{{comment.id}}">Reply</button>
+                </div>
+                {{/if}}
+                <span>
+                    <pre>{{{comment.comment_text}}}</pre>
+                </span>
+            </div>
+            <div class="comment-form">
+                <form>
+                    <fieldset>
+                        <label for="comment-body">Post Reply</label>
+                        <textarea id="comment-body" name="comment-body" data-post="{{../post.id}}"></textarea>
+                        <input type="submit" value="Submit">
+                        <input type="button" value="Dismiss">
+                    </fieldset>
+                </form>
+            </div>
+            {{/each}}
+        </section>
     </div>
 </section>
 <script src="/js/comment.js"></script>

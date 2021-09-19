@@ -19,7 +19,7 @@ const loginFormHandler = async (event) => {
             if ("errors" in errMsg) {
                 displayModal(errMsg.errors[0].message)
             } else {
-                displayModal(errMsg)
+                displayModal("Error in Submission")
             }
         }
     } else {

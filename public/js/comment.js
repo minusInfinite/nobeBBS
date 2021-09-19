@@ -1,5 +1,3 @@
-const postButtons = document.querySelector("#post-template")
-
 /**
  *
  * @param {Event} event
@@ -25,13 +23,12 @@ async function showForm(event) {
 
     if (element.localName === "input" && element.value.includes("Dismiss")) {
         const elParent = element.parentElement.parentElement.parentElement
-        element.previousElementSibling.value = ""
+        element.previousElementSibling.previousElementSibling.value = ""
         elParent.style.display = "none"
     }
 
-    if (element.localName === "input" && element.value.includes("Sumbit")) {
+    if (element.localName === "input" && element.value.includes("Submit")) {
         const comment_text = element.previousElementSibling.value.trim()
-
         const post_id = window.location.pathname.toString().split("/")[
             window.location.pathname.toString().split("/").length - 1
         ]
@@ -62,7 +59,7 @@ async function showForm(event) {
                     }
                 }
             } catch (err) {
-                console.log(err)
+                displayModal(err)
             }
         }
     }
