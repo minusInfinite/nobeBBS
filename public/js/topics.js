@@ -18,7 +18,6 @@ function submitTopic() {
     const dismissBtn = document.querySelector("input[value='Dismiss']")
 
     dismissBtn.onclick = () => {
-        console.log(topicSubject)
         topicSubject.value = ""
         topicForm.style.display = "none"
     }

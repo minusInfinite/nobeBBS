@@ -1,21 +1,20 @@
-const { Post } = require('../models');
+const { Post } = require("../models")
 
-const router = require('express').Router();
+const router = require("express").Router()
 
-router.get('/', (req, res) => {
-    res.send('HELLO WORLD')
+router.get("/", (req, res) => {
+    res.send("HELLO WORLD")
 })
 
-router.get('/new', (req, res) => {
-    res.render('newPost');
+router.get("/new", (req, res) => {
+    res.render("newPost")
 })
 
-router.get('/edit/:id', async (req, res) => {
+router.get("/edit/:id", async (req, res) => {
     const post = await Post.findByPk(req.params.id, {
-        raw:true
-    });
-    console.log(post);
-    res.render('editPost', {post});
+        raw: true,
+    })
+    res.render("editPost", { post })
 })
 
-module.exports = router;
+module.exports = router

@@ -10,7 +10,6 @@ router.post("/", isAdmin, (req, res) => {
     })
         .then((dbPostData) => res.json(dbPostData))
         .catch((err) => {
-            console.log(err)
             res.status(500).json(err)
         })
 })
@@ -35,7 +34,6 @@ router.put("/:id", isAdmin, (req, res) => {
             res.json(dbPostData)
         })
         .catch((err) => {
-            console.log(err)
             res.status(500).json(err)
         })
 })
@@ -55,7 +53,6 @@ router.delete("/:id", isAdmin, (req, res) => {
             res.json(dbPostData)
         })
         .catch((err) => {
-            console.log(err)
             res.status(500).json(err)
         })
 })

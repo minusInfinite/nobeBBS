@@ -37,7 +37,6 @@ router.get("/", async (req, res) => {
             user: req.user,
         })
     } catch (err) {
-        console.log(err)
         res.status(500).json(err)
     }
 })
@@ -82,7 +81,6 @@ router.get("/topic/:topic_id", async (req, res) => {
             user: req.user,
         })
     } catch (err) {
-        console.log(err)
         res.status(500).json(err)
     }
 })
@@ -129,7 +127,6 @@ router.get("/topic/:topic_id/post/:post_id", async (req, res) => {
             user: req.user,
         })
     } catch (err) {
-        console.log(err)
         res.status(500).json(err)
     }
 })

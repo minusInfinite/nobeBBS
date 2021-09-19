@@ -33,8 +33,6 @@ async function showForm(event) {
             window.location.pathname.toString().split("/").length - 1
         ]
 
-        console.log(post_id)
-
         if (comment_text) {
             try {
                 const response = await fetch("/api/comment/", {

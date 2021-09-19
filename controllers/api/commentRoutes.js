@@ -14,7 +14,6 @@ router.post("/", isAuth, async (req, res) => {
         })
         res.status(201).json(newComment)
     } catch (err) {
-        console.log(err)
         res.status(400).json(err)
     }
 })
@@ -36,7 +35,6 @@ router.delete("/:id", isAuth, (req, res) => {
             res.json(dbCommentData)
         })
         .catch((err) => {
-            console.log(err)
             res.status(500).json(err)
         })
 })
