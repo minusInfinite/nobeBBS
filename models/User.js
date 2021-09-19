@@ -33,6 +33,7 @@ User.init(
         is_admin: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
+            defaultValue: false,
         },
         last_login: {
             type: DataTypes.DATE,
