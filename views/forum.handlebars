@@ -13,7 +13,7 @@
                     >{{post.subject}}</a>
                     <br />
                     Posted by
-                    {{post.user.username}}
+                    {{post.poster.username}}
                     on
                     {{format_datetime post.createdAt}}
 
@@ -25,9 +25,8 @@
                                 href="/topic/{{post.topic_id}}/post/{{post.id}}/#comment{{comment.id}}"
                             >Last Reply</a><br />
                             by
-                            {{comment.user.username}}<br />{{format_datetime
-                                comment.createdAt
-                            }}
+                            {{comment.commentor.username}}<br
+                            />{{format_datetime comment.createdAt}}
                         </span>
                     {{/each}}
                 {{else}}

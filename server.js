@@ -5,7 +5,6 @@ const session = require("express-session")
 const exphbs = require("express-handlebars")
 const routes = require("./controllers")
 const helpers = require("./utils/helpers")
-const makeAdmin = require("./utils/makeAdmin")
 
 const sequelize = require("./config/connection")
 const passport = require("passport")
@@ -47,7 +46,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(routes)
 
-sequelize.sync({ alter: true }).then(() => {
+sequelize.sync({ alter: false }).then(() => {
     app.listen(PORT, () =>
         console.log(`Server Runnning http://localhost:${PORT}`)
     )

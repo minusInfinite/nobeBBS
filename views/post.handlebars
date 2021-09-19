@@ -1,4 +1,4 @@
-<section>
+<section id="post-template">
     <div class="main-container">
         <div class="main-container-header" id="top">
             <span>
@@ -13,45 +13,56 @@
             <span>
                 Posted by
                 {{post.user.username}}
-                <a href="#"><img
-                        src="/{{post.user.avatar}}"
-                        alt="{{post.user.username}}'s avatar"
-                    />
+                <a href="#"><img src="/{{post.poster.avatar}}" alt="{{post.poser.username}}'s avatar" />
                 </a><br />{{format_datetime post.createdAt}}</span>
+            {{#if user}}
             <div class="post-container-buttons">
-                <button id="quote" data-post="{{post.id}}">Quote</button>
-                <button id="reply" data-post="{{post.id}}">Reply</button>
+                <button id="quote-post" data-post="{{post.id}}">Quote</button>
+                <button id="reply-post" data-post="{{post.id}}">Reply</button>
             </div>
+            {{/if}}
             <span>
-                <p>{{{post.content}}}</p>
+                <pre>{{{post.content}}}</pre>
             </span>
         </div>
-        {{#if comments}}
-            {{#each comments as |comment|}}
-                <div class="post-container-row" id="comment{{comment.id}}">
-                    <span>
-                        Posted by
-                        {{comment.user.username}}
-                        <a href="#"><img
-                                src="/{{comment.user.avatar}}"
-                                alt="{{comment.user.username}}'s avatar"
-                            />
-                        </a><br />{{format_datetime comment.createdAt}}</span>
-                    <div class="post-container-buttons">
-                        <button
-                            id="quote"
-                            data-post="{{post.id}}"
-                        >Quote</button>
-                        <button
-                            id="reply"
-                            data-post="{{post.id}}"
-                        >Reply</button>
-                    </div>
-                    <span>
-                        <p>{{{comment.comment_text}}}</p>
-                    </span>
-                </div>
-            {{/each}}
-        {{/if}}
+        <div class="comment-form">
+            <form>
+                <fieldset>
+                    <label for="comment-body">Post Reply</label>
+                    <textarea id="comment-body" name="comment-body"></textarea>
+                    <input type="submit" value="Sumbit">
+                    <input type="button" value="Dismiss">
+                </fieldset>
+            </form>
+        </div>
+        {{#each comments as |comment| }}
+        <div class="post-container-row" id="comment{{comment.id}}">
+            <span>
+                Posted by
+                {{comment.commentor.username}}
+                <a href="#"><img src="/{{comment.commentor.avatar}}" alt="{{comment.commentor.username}}'s avatar" />
+                </a><br />{{format_datetime comment.createdAt}}</span>
+            {{#if ../user}}
+            <div class="post-container-buttons">
+                <button id="quote-comment{{comment.id}}">Quote</button>
+                <button id="reply-comment{{comment.id}}">Reply</button>
+            </div>
+            {{/if}}
+            <span>
+                <pre>{{{comment.comment_text}}}</pre>
+            </span>
+        </div>
+        <div class="comment-form">
+            <form>
+                <fieldset>
+                    <label for="comment-body">Post Reply</label>
+                    <textarea id="comment-body" name="comment-body" data-post="{{../post.id}}"></textarea>
+                    <input type="submit" value="Sumbit">
+                    <input type="button" value="Dismiss">
+                </fieldset>
+            </form>
+        </div>
+        {{/each}}
     </div>
 </section>
+<script src="/js/comment.js"></script>

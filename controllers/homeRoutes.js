@@ -23,6 +23,7 @@ router.get("/", async (req, res) => {
                     include: {
                         model: User,
                         attributes: ["username"],
+                        as: "poster",
                     },
                 },
             ],
@@ -60,8 +61,15 @@ router.get("/topic/:topic_id", async (req, res) => {
             include: [
                 {
                     model: Comment,
+                    include: [
+                        {
+                            model: User,
+                            attributes: ["username"],
+                            as: "commentor",
+                        },
+                    ],
                 },
-                { model: User, attributes: ["username"] },
+                { model: User, attributes: ["username"], as: "poster" },
             ],
             order: [[Comment, "created_at", "DESC"]],
             group: ["Post.id"],
@@ -90,7 +98,11 @@ router.get("/topic/:topic_id/post/:post_id", async (req, res) => {
             attributes: ["id", "subject", "content", "createdAt", "topic_id"],
             // Get all comments
             include: [
-                { model: User, attributes: ["id", "username", "avatar"] },
+                {
+                    model: User,
+                    attributes: ["id", "username", "avatar"],
+                    as: "poster",
+                },
             ],
         })
 
@@ -99,6 +111,7 @@ router.get("/topic/:topic_id/post/:post_id", async (req, res) => {
             attributes: ["id", "comment_text", "createdAt"],
             include: {
                 model: User,
+                as: "commentor",
                 attributes: ["id", "username", "avatar"],
             },
         })

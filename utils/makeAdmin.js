@@ -19,6 +19,7 @@ const makeAdmin = async (req, res, next) => {
                     username: "administrator",
                     password: adminPass,
                     is_admin: true,
+                    avatar: "img/default_avatar.png",
                 },
                 { individualHooks: true }
             )

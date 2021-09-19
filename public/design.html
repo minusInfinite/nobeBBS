@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <script src=""></script>
     <div class="wrap">
         <div class="header-container">
             <header>
@@ -27,89 +28,115 @@
             </nav>
         </div>
         <main>
-            <section>
+            <section id="post-template">
                 <div class="main-container">
-                    <div class="main-container-header" id="top">
+                    <div class="main-container-header" id="original-post">
                         <span>
                             <ul>
                                 <li><a href="/">Topics</a></li>
-                                <li><a href="/topic/topic.id">Topic Subject</a></li>
-                                <li>post subject</li>
+                                <li><a href="/topic/1">An API Topic</a></li>
+                                <li>API test Post again</li>
                             </ul>
                         </span>
                     </div>
-                    <div class="post-container-row">
+                    <div class="post-container-row" data-post="1">
                         <span>
-                            Posted by User <a href="#"><img src="img/default_avatar.png" alt=""> </a><br />Tue
-                            Sept
-                            14 2021 8:00 pm
-                        </span>
+                            Posted by <br> Username
+                            <a href="#"><img src="img/default_avatar.png" alt="'s avatar" />
+                            </a><br />17/09/2021, 8:33:54 pm</span>
                         <div class="post-container-buttons">
-                            <button id="quote">Quote</button>
-                            <button id="reply">Reply</button>
+                            <button id="quote-post">Quote</button>
+                            <button id="reply-post">Reply</button>
                         </div>
-                        <span>
-                            <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
-                                labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
-                                animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
-                                aliquip amet voluptate voluptate dolor minim nulla est proident.</p>
-                            <p>
-                                Nostrud officia
-                                pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
-                                commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
-                                proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
-                                eiusmod.</p>
-                            <p>
-                                Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-                                Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
-                                culpa duis.</p>
+                        <span data-post-content="">
+                            <p>Testing API for Front End</p>
                         </span>
                     </div>
-                    <div class="post-container-row">
-                        <span>Comment by <a href>User</a><br />Tue Sept 14, 2021 8:00 pm</span>
+                    <div id="post1" class="comment-form">
+                        <form>
+                            <fieldset>
+                                <label for="comment-body">Post Reply</label>
+                                <textarea id="comment-body" name="comment-body"></textarea>
+                                <input type="submit" value="Reply">
+                                <input type="button" value="Dismiss">
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="post-container-row" id="comment1">
+                        <span>
+                            Posted by
+                            administrator
+                            <a href="#"><img src="img/default_avatar.png" alt="administrator's avatar" />
+                            </a><br />17/09/2021, 9:36:39 pm</span>
                         <div class="post-container-buttons">
-                            <button id="quote">Quote</button>
-                            <button id="reply">Reply</button>
+                            <button id="quote-comment1" data-post="" data-comment="1">Quote</button>
+                            <button id="reply-comment1" data-post="" data-comment="1">Reply</button>
                         </div>
                         <span>
-                            <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
-                                labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
-                                animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
-                                aliquip amet voluptate voluptate dolor minim nulla est proident.</p>
-                            <p>
-                                Nostrud officia
-                                pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
-                                commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
-                                proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
-                                eiusmod.</p>
-                            <p>
-                                Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-                                Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
-                                culpa duis.</p>
+                            <p>Testing API for Front End</p>
                         </span>
                     </div>
-                    <div class="post-container-row">
-                        <span>Comment by <a href>User</a><br />Tue Sept 14, 2021 8:00 pm</span>
+                    <div id="comment1" class="comment-form">
+                        <form>
+                            <fieldset>
+                                <label for="comment-body">Post Reply</label>
+                                <textarea id="comment-text">
+                            </textarea>
+                                <input type="submit" value="Reply">
+                                <input type="button" value="Dismiss">
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="post-container-row" id="comment2">
+                        <span>
+                            Posted by
+                            administrator
+                            <a href="#"><img src="img/default_avatar.png" alt="administrator's avatar" />
+                            </a><br />17/09/2021, 9:36:50 pm</span>
                         <div class="post-container-buttons">
-                            <button id="quote">Quote</button>
-                            <button id="reply">Reply</button>
+                            <button id="quote-comment2" data-post="" data-comment="2">Quote</button>
+                            <button id="reply-comment2" data-post="" data-comment="2">Reply</button>
                         </div>
                         <span>
-                            <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim
-                                labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi
-                                animcupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est
-                                aliquip amet voluptate voluptate dolor minim nulla est proident.</p>
-                            <p>
-                                Nostrud officia
-                                pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
-                                commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa
-                                proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia
-                                eiusmod.</p>
-                            <p>
-                                Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim.
-                                Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et
-                                culpa duis.</p>
+                            <p>Testing API for Front End</p>
                         </span>
+                    </div>
+                    <div id="comment2" class="comment-form">
+                        <form>
+                            <fieldset>
+                                <label for="comment-text">Post Reply</label>
+                                <textarea id="comment-text">
+                            </textarea>
+                                <input type="submit" value="Reply">
+                                <input type="button" value="Dismiss">
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="post-container-row" id="comment9">
+                        <span>
+                            Posted by
+                            administrator
+                            <a href="#"><img src="img/default_avatar.png" alt="administrator's avatar" />
+                            </a><br />18/09/2021, 2:18:20 pm</span>
+                        <div class="post-container-buttons">
+                            <button id="quote-comment9" data-post="" data-comment="9">Quote</button>
+                            <button id="reply-comment9" data-post="" data-comment="9">Reply</button>
+                        </div>
+                        <span>
+                            <p>
+                            <p>Testing comment with <strong>HTML</strong></p>
+                            </p>
+                        </span>
+                    </div>
+                    <div id="comment2" class="comment-form">
+                        <form>
+                            <fieldset>
+                                <label for="comment-text">Post Reply</label>
+                                <textarea id="comment-text"></textarea>
+                                <input type="submit" value="Reply">
+                                <input type="button" value="Dismiss">
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
             </section>
@@ -140,6 +167,9 @@
             </div>
         </div>
     </div>
+    <script src="js/modal.js"></script>
+    <script src="js/buildel.js"></script>
+
 </body>
 
 </html>

@@ -6,7 +6,6 @@
             <span>Last Post</span>
         </div>
         {{#each topics as |topic|}}
-            {{log topic.posts}}
             <div class="main-container-row">
                 <span><a href="/topic/{{topic.id}}">{{topic.subject}}</a></span>
                 <span>{{topic.post_count}}</span>
@@ -16,7 +15,7 @@
                                 href="/post/{{post.id}}"
                             >{{post.subject}}</a><br />
                             by
-                            {{post.user.username}}<br />{{format_date
+                            {{post.poster.username}}<br />{{format_date
                                 post.createdAt
                             }}
                         </span>
