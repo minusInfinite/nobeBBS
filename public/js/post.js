@@ -21,6 +21,7 @@ function submitTopic() {
     dismissBtn.onclick = () => {
         console.log(postSubject)
         postSubject.value = ""
+        postContent.value = ""
         postForm.style.display = "none"
     }
 
