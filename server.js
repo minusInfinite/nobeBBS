@@ -46,6 +46,10 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(routes)
 
+app.get("*", (req, res) => {
+    res.status(404).render("404")
+})
+
 sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () =>
         console.log(`Server Runnning http://localhost:${PORT}`)
