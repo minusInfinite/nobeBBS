@@ -18,7 +18,7 @@ async function showForm(event) {
         const elForm = element.parentElement.parentElement.nextElementSibling
         elForm.style.display = "flex"
         const currentContent = elParent.childNodes[5].textContent.trim()
-        elForm.childNodes[1][1].value = currentContent
+        elForm.childNodes[1][1].value = `<em>${currentContent}</em>`
     }
 
     if (element.localName === "input" && element.value.includes("Dismiss")) {

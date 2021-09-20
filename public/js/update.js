@@ -28,7 +28,7 @@ const updatePassFormHandler = async (event) => {
 }
 
 document
-    .querySelector("#update-pass-form")
+    .querySelector("#password-form")
     .addEventListener("submit", updatePassFormHandler)
 
 const updateAvatarFormHandler = async (event) => {
@@ -58,5 +58,5 @@ const updateAvatarFormHandler = async (event) => {
 }
 
 document
-    .querySelector("#update-avatar-form")
+    .querySelector("#avatar-form")
     .addEventListener("submit", updateAvatarFormHandler)

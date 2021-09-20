@@ -87,7 +87,7 @@ router.patch("/updateavatar", isAuth, async (req, res) => {
         if (req.user) {
             const user = await User.findByPk(req.user.id, { plain: true })
             user.avatar = req.body.avatar
-            await user.save()
+            await user.save({ hooks: false })
             res.status(200).json("success")
         } else {
             res.status(400).json({ msg: "failed to update" })

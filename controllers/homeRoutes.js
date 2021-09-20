@@ -94,7 +94,7 @@ router.get("/topic/:topic_id/post/:post_id", async (req, res) => {
         const postsData = await Post.findOne({
             where: { id: req.params.post_id },
             attributes: ["id", "subject", "content", "createdAt", "topic_id"],
-            // Get all comments
+            //include user data
             include: [
                 {
                     model: User,
@@ -127,6 +127,29 @@ router.get("/topic/:topic_id/post/:post_id", async (req, res) => {
             user: req.user,
         })
     } catch (err) {
+        res.status(500).json(err)
+    }
+})
+
+router.get("/user-dashboard", isAuth, async (req, res) => {
+    try {
+        const userPosts = await Post.findAll({
+            where: { user_id: req.user.id },
+            include: [
+                {
+                    model: Comment,
+                },
+            ],
+        })
+
+        const posts = userPosts.map((post) => post.get({ plain: true }))
+
+        res.render("userdash", {
+            posts,
+            user: req.user,
+        })
+    } catch (err) {
+        console.log(err)
         res.status(500).json(err)
     }
 })
