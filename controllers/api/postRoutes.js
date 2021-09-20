@@ -1,24 +1,6 @@
 const router = require("express").Router()
 const { Post, Comment } = require("../../models")
-
-// get all posts where ?t=TOPIC_ID
-router.get("/", async (req, res) => {
-    try {
-        const posts = await Post.findAll({
-            where: {
-                topic_id: req.query.t,
-            },
-            include: [
-                {
-                    model: Comment,
-                },
-            ],
-        })
-        res.status(200).json(posts)
-    } catch (error) {
-        res.status(400).json(error)
-    }
-})
+const { isAuth } = require("../middleware/auth")
 
 // create new post
 router.post("/", async (req, res) => {
@@ -54,6 +36,25 @@ router.get("/:id", async (req, res) => {
     } catch (error) {
         res.status(400).json(error)
     }
+})
+
+router.delete("/:id", isAuth, (req, res) => {
+    Post.destroy({
+        where: {
+            id: req.params.id,
+            user_id: req.user.id,
+        },
+    })
+        .then((dbPostData) => {
+            if (!dbPostData) {
+                res.status(404).json({ message: "No post found with this id" })
+                return
+            }
+            res.json(dbPostData)
+        })
+        .catch((err) => {
+            res.status(500).json(err)
+        })
 })
 
 module.exports = router

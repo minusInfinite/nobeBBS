@@ -23,6 +23,7 @@ router.delete("/:id", isAuth, (req, res) => {
     Comment.destroy({
         where: {
             id: req.params.id,
+            user_id: req.user.id,
         },
     })
         .then((dbCommentData) => {

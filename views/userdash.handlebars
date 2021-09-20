@@ -8,7 +8,6 @@
         <div id="user-post-list">
             <h3>Posts and Comments</h3>
             {{#if posts}}
-                {{log posts}}
                 <ul>
                     {{#each posts as |post|}}
                         <li>
@@ -18,9 +17,8 @@
                             ></button>
                             <ul class="user-comment-list">
                                 {{#each comments as |comment|}}
-                                    {{log comment}}
                                     <li>
-                                        comment
+                                        comment on Post
                                         <button
                                             data-comment="{{comment.id}}"
                                             class="delete-btn"
