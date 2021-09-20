@@ -553,7 +553,6 @@ input[type="button"]:focus {
     border: 2px solid var(--dark-color);
 }
 
-/* All Form Button Styles */
 .user-form form input[type="submit"] {
     background-color: var(--dark-color);
     color: var(--link-color);
@@ -571,6 +570,11 @@ input[type="button"]:focus {
     color: var(--hover-color);
     border: 2px solid var(--base-color);
     cursor: pointer;
+}
+
+.user-form .optional {
+    font-size: 0.8rem;
+    font-style: italic;
 }
 
 /* Modal Styles */
