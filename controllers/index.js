@@ -9,7 +9,5 @@ router.use(makeAdmin)
 
 router.use("/api", apiRoutes)
 router.use("/", homeRoutes)
-router.use("/users", userRoutes)
-router.use("/posts", postRoutes)
 
 module.exports = router
