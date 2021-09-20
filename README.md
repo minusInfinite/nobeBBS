@@ -1,2 +1,61 @@
-# Project-2
-A Modern Bulletin Board System in Node JS and Express
+# NodeBBS
+
+A Modern Bulletin Board System in Node JS and Express with a Classic look
+
+[Live Demo](https://nodebbs-demo.herokuapp.com/)
+
+## Contents
+
+[Local Deployment](#local-deployment)
+[Examples](#examples)
+
+## Local Deployment
+
+This CRM uses [MySQL](https://dev.mysql.com/) as it's database and
+[Sequelize](https://sequelize.org/) as the ORM for providing schema models and queries.
+
+Be sure to have MySQL setup an running before you download.
+
+### Download
+
+In your terminal download the repo
+
+```terminal
+git clone https://github.com/minusInfinite/nobeBBS.git
+```
+
+Once downloaded install the dependencies with NPM
+
+```terminal
+npm install
+```
+
+You will also need to edit the .env.EXAMPLE file to .env with the following
+
+> DBNAME - _The database Name_
+>
+> DBUSER - _Your server or database Username_
+>
+> DBPASS - _Your server or database password_
+>
+> CSECRET - _Random characters for the Session Cookie Secret_
+>
+> ADMINPASS= _Set the initial Administrator Password_
+
+Once you .env is setup you should be able to run the server
+
+```terminal
+npm start
+```
+
+Or for development
+
+```terminal
+npm run dev
+```
+
+## Example
+
+[Live Demo](https://nodebbs-demo.herokuapp.com/)
+
+![Animated Demo GIF](/mdassets/nodebbs-demo.gif)
