@@ -7,6 +7,9 @@ A Modern Bulletin Board System in Node JS and Express with a Classic look
 ## Contents
 
 [Local Deployment](#local-deployment)
+
+[To-Do](#to-do)
+
 [Examples](#examples)
 
 ## Local Deployment
@@ -53,6 +56,13 @@ Or for development
 ```terminal
 npm run dev
 ```
+
+## To-Do
+
+-   Create the Admin Dashboard for full forum management.
+-   Add some kind of WYSIWYG editor
+-   Sanatise text input from code injection.
+-   If you would like to add features please raise an issue or PR.
 
 ## Example
 
