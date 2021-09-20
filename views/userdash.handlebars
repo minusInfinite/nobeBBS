@@ -1,0 +1,63 @@
+<section>
+    <div class="main-container">
+        <div class="main-container-header">
+            <h2>User Dashboard</h2>
+        </div>
+    </div>
+    <div class="dashboard-container-col">
+        <div id="user-post-list">
+            <h3>Posts and Comments</h3>
+            {{#if posts}}
+                {{log posts}}
+                <ul>
+                    {{#each posts as |post|}}
+                        <li>
+                            {{post.subject}}<button
+                                data-post="{{post.id}}"
+                                class="delete-btn"
+                            ></button>
+                            <ul class="user-comment-list">
+                                {{#each comments as |comment|}}
+                                    {{log comment}}
+                                    <li>
+                                        comment
+                                        <button
+                                            data-comment="{{comment.id}}"
+                                            class="delete-btn"
+                                        ></button>
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </li>
+                    {{/each}}
+                </ul>
+            {{/if}}
+        </div>
+        <div class="change-avatar">
+            <h3>Avatar</h3>
+            <form id="avatar-form">
+                <fieldset>
+                    <label for="avatar-url">Change Avatar URL</label>
+                    <input id="avatar-url" type="text" />
+                    <input type="submit" />
+                </fieldset>
+            </form>
+            <p>Current Avatar</p>
+            <img src="{{user.avatar}}" alt="Your current avatar" />
+
+        </div>
+        <div class="new-password">
+            <h3>Password</h3>
+            <form id="password-form">
+                <fieldset>
+                    <label for="current-password">Current Password</label>
+                    <input id="current-password" type="text" />
+                    <label for="new-password">New Password</label>
+                    <input id="new-password" type="text" />
+                    <input type="submit" />
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</section>
+<script src="/js/update.js"></script>

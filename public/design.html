@@ -4,11 +4,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/styles.css" />
     <title>NodeBBS</title>
 </head>
 
 <body>
+    <script src=""></script>
     <div class="wrap">
         <div class="header-container">
             <header>
@@ -29,33 +31,195 @@
             <section>
                 <div class="main-container">
                     <div class="main-container-header">
-                        <span>Topics</span>
-                        <span>Posts</span>
-                        <span>Last Post</span>
+                        <h2>User Dashboard</h2>
                     </div>
-                    <div class="main-container-row">
-                        <span>Lorem ipsum dolor sit amet</span>
-                        <span> 3</span>
-                        <span><a href="#">Lorem ipsum dolor sit amet</a><br />
-                            by <a href>User</a><br />Tue Sept 14, 2021 8:00
-                            pm</span>
+                </div>
+                <div class="dashboard-container-col">
+                    <div id="user-post-list">
+                        <h3>Posts and Comments</h3>
+                        <ul>
+                            <li>
+                                Post 1<button class="delete-btn"></button>
+                                <ul class="user-comment-list">
+                                    <li>
+                                        comment <button class="delete-btn"></button>
+                                    </li>
+                                    <li>
+                                        comment <button class="delete-btn"></button>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                Post 2
+                            </li>
+                            <li>
+                                Post 3
+                            </li>
+                            <li>
+                                Post 4
+                            </li>
+                        </ul>
                     </div>
-                    <div class="main-container-row">
-                        <span>Lorem ipsum dolor sit amet</span>
-                        <span> 3</span>
-                        <span><a href="#">Lorem ipsum dolor sit amet</a><br />
-                            by <a href>User</a><br />Tue Sept 14, 2021 8:00
-                            pm</span>
+                    <div class="change-avatar">
+                        <h3>Avatar</h3>
+                        <form id="avatar-form">
+                            <fieldset>
+                                <label for="avatar-url">Change Avatar URL</label>
+                                <input id="avatar-url" type="text">
+                                <input type="submit">
+                            </fieldset>
+                        </form>
+                        <p>Current Avatar</p>
+                        <img src="img/default_avatar.png" alt="users current avatar">
+
                     </div>
-                    <div class="main-container-row">
-                        <span>Lorem ipsum dolor sit amet</span>
-                        <span> 3</span>
-                        <span><a href="#">Lorem ipsum dolor sit amet</a><br />
-                            by <a href>User</a><br />Tue Sept 14, 2021 8:00
-                            pm</span>
+                    <div class="new-password">
+                        <h3>Password</h3>
+                        <form id="password-form">
+                            <fieldset>
+                                <label for="current-password">Current Password</label>
+                                <input id="current-password" type="text">
+                                <label for="new-password">New Password</label>
+                                <input id="new-password" type="text">
+                                <input type="submit">
+                            </fieldset>
+                        </form>
                     </div>
                 </div>
             </section>
+            <!-- <section id="post-template">
+                <div class="main-container">
+                    <div class="main-container-header" id="original-post">
+                        <span>
+                            <ul>
+                                <li><a href="/">Topics</a></li>
+                                <li><a href="/topic/1">An API Topic</a></li>
+                                <li>API test Post again</li>
+                            </ul>
+                        </span>
+                    </div>
+                    <div class="post-container-row" data-post="1">
+                        <span>
+                            Posted by <br />
+                            Username
+                            <a href="#"><img src="img/default_avatar.png" alt="'s avatar" /> </a><br />17/09/2021,
+                            8:33:54 pm</span>
+                        <div class="post-container-buttons">
+                            <button id="quote-post">Quote</button>
+                            <button id="reply-post">Reply</button>
+                        </div>
+                        <span data-post-content="">
+                            <p>Testing API for Front End</p>
+                        </span>
+                    </div>
+                    <div id="post1" class="comment-form">
+                        <form>
+                            <fieldset>
+                                <label for="comment-body">Post Reply</label>
+                                <textarea id="comment-body" name="comment-body"></textarea>
+                                <input type="submit" value="Reply" />
+                                <input type="button" value="Dismiss" />
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="post-container-row" id="comment1">
+                        <span>
+                            Posted by administrator
+                            <a href="#"><img src="img/default_avatar.png" alt="administrator's avatar" />
+                            </a><br />17/09/2021, 9:36:39 pm</span>
+                        <div class="post-container-buttons">
+                            <button id="quote-comment1" data-post="" data-comment="1">
+                                Quote
+                            </button>
+                            <button id="reply-comment1" data-post="" data-comment="1">
+                                Reply
+                            </button>
+                        </div>
+                        <span>
+                            <p>Testing API for Front End</p>
+                        </span>
+                    </div>
+                    <div id="comment1" class="comment-form">
+                        <form>
+                            <fieldset>
+                                <label for="comment-body">Post Reply</label>
+                                <textarea id="comment-text"> </textarea>
+                                <input type="submit" value="Reply" />
+                                <input type="button" value="Dismiss" />
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="post-container-row" id="comment2">
+                        <span>
+                            Posted by administrator
+                            <a href="#"><img src="img/default_avatar.png" alt="administrator's avatar" />
+                            </a><br />17/09/2021, 9:36:50 pm</span>
+                        <div class="post-container-buttons">
+                            <button id="quote-comment2" data-post="" data-comment="2">
+                                Quote
+                            </button>
+                            <button id="reply-comment2" data-post="" data-comment="2">
+                                Reply
+                            </button>
+                        </div>
+                        <span>
+                            <p>Testing API for Front End</p>
+                        </span>
+                    </div>
+                    <div id="comment2" class="comment-form">
+                        <form>
+                            <fieldset>
+                                <label for="comment-text">Post Reply</label>
+                                <textarea id="comment-text"> </textarea>
+                                <input type="submit" value="Reply" />
+                                <input type="button" value="Dismiss" />
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="post-container-row" id="comment9">
+                        <span>
+                            Posted by administrator
+                            <a href="#"><img src="img/default_avatar.png" alt="administrator's avatar" />
+                            </a><br />18/09/2021, 2:18:20 pm</span>
+                        <div class="post-container-buttons">
+                            <button id="quote-comment9" data-post="" data-comment="9">
+                                Quote
+                            </button>
+                            <button id="reply-comment9" data-post="" data-comment="9">
+                                Reply
+                            </button>
+                        </div>
+                        <span>
+                            <p>
+                                Testing comment with <strong>HTML</strong>
+                            </p>
+                        </span>
+                    </div>
+                    <div id="comment2" class="comment-form">
+                        <form>
+                            <fieldset>
+                                <label for="comment-text">Post Reply</label>
+                                <textarea id="comment-text"></textarea>
+                                <input type="submit" value="Reply" />
+                                <input type="button" value="Dismiss" />
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </section> -->
+            <!-- <section class="user-form main-container">
+                <form id="login-form">
+                    <fieldset>
+                        <legend>Login</legend>
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username">
+
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password">
+                        <input type="submit" value="Login">
+                    </fieldset>
+                </form>
+            </section> -->
         </main>
     </div>
     <!-- The below is hidden by default -->
@@ -70,7 +234,6 @@
             </div>
         </div>
     </div>
-    <script src="./js/scripts.js"></script>
 </body>
 
 </html>

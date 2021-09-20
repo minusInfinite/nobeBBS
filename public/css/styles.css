@@ -5,17 +5,18 @@
 /* Variables */
 :root {
     --base-color: rgb(7, 83, 248);
-    --hover-color: rgb(181, 58, 238);
-    --link-color: rgb(128, 5, 185);
-    --dark-color: rgb(38, 13, 136);
-    --divbg-color: rgb(235, 229, 253);
+    --link-color: rgb(194, 108, 235);
+    --hover-color: rgb(128, 5, 185);
+    --dark-color: rgb(20, 6, 73);
+    --light-color: rgb(213, 219, 235);
     --visit-color: rgb(45, 43, 78);
 }
 
 html,
 body {
-    min-height: 100vw;
+    min-height: max-content;
     min-width: 90vw;
+    padding-bottom: 5em;
 }
 
 body {
@@ -60,15 +61,6 @@ nav {
     bottom: 0;
 }
 
-nav a {
-    text-decoration: none;
-    color: var(--link-color);
-}
-
-nav a:hover {
-    color: var(--hover-color);
-}
-
 nav ul {
     margin: 0;
     padding: 0.5rem 1rem;
@@ -86,8 +78,38 @@ nav li:not(:last-child)::after {
     margin: 0 0.5em;
 }
 
+a {
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+a:hover,
+a:focus {
+    color: var(--hover-color);
+}
+
+main {
+    background-color: var(--dark-color);
+    border-radius: 1rem;
+}
+
 section {
     min-width: 80vw;
+}
+
+footer {
+    position: relative;
+    margin-bottom: 2rem;
+    background-color: rgb(235, 229, 253);
+    border: 1px solid var(--base-color);
+    border-radius: 1em;
+}
+
+.user-last-login {
+    margin: 0 auto;
+    font-style: italic;
+    font-size: 0.8rem;
+    padding: 0.5em 1em;
 }
 
 .main-container {
@@ -97,8 +119,79 @@ section {
     margin-top: 4rem;
 }
 
+.add-btn,
+.delete-btn {
+    position: relative;
+    display: inline;
+    border: none;
+    float: right;
+    margin-right: 1rem;
+    border-radius: 50%;
+    max-height: 1.05em;
+    height: 1.05em;
+    max-width: 1.05em;
+    width: 1.05em;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.add-btn {
+    background-color: var(--dark-color);
+}
+
+.delete-btn {
+    background-color: rgb(219, 1, 1);
+}
+
+.add-btn::after,
+.add-btn::before {
+    background-color: #fff;
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    transform-origin: center;
+}
+
+.delete-btn::after,
+.delete-btn::before {
+    background-color: #fff;
+    content: "";
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+    transform-origin: center;
+}
+
+.add-btn::after,
+.delete-btn::after {
+    height: 50%;
+    width: 2px;
+}
+
+.add-btn::before,
+.delete-btn::before {
+    height: 2px;
+    width: 50%;
+}
+
+.add-btn::after {
+    height: 50%;
+    width: 2px;
+}
+
+.add-btn::before {
+    height: 2px;
+    width: 50%;
+}
+
 .main-container-header,
-.main-container-row {
+.main-container-row,
+.post-container-row {
     flex: 1 0 100%;
     display: flex;
     justify-content: space-around;
@@ -124,31 +217,360 @@ section {
     font-weight: 600;
 }
 
-.main-container-row span {
+.main-container-row span,
+.post-container-row span {
     padding-top: 1.5rem;
+    padding-bottom: 1rem;
 }
 
 .main-container-header span {
     border-bottom: 3px solid var(--base-color);
 }
 
-.main-container-row span {
+.main-container-row span,
+.post-container-row span {
     border-bottom: 1px solid var(--base-color);
 }
 
 .main-container-header span:first-child,
-.main-container-row span:first-child {
+.main-container-row span:first-child,
+.post-container-row span:first-child {
     border-bottom-left-radius: 1rem;
 }
 
 .main-container-header span:last-child,
-.main-container-row span:last-child {
+.main-container-row span:last-child,
+.post-container-row span:last-child {
+    padding-right: 0.8rem;
     border-bottom-right-radius: 1rem;
 }
 
 .main-container-header span:not(:last-child),
-.main-container-row span:not(:last-child) {
+.main-container-row span:not(:last-child),
+.post-container-row span:not(:last-child) {
     border-right: 1px solid var(--base-color);
+}
+
+.main-container-header ul {
+    margin: 0;
+    padding: 0.5rem 1rem;
+}
+
+.main-container-header li {
+    list-style: none;
+    display: inline-block;
+    font-weight: 600;
+    padding: 0;
+}
+
+.main-container-header li:not(:last-child)::after {
+    content: " ● ";
+    margin: 0 0.5em;
+}
+
+.post-container-row span img {
+    display: block;
+    padding: 1rem 0;
+    border-radius: 50%;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.post-container-row span:first-child {
+    flex: 0 1 20%;
+    width: 20%;
+    text-align: center;
+}
+.post-container-row span {
+    flex: 1 0 70%;
+    width: 70%;
+    padding-bottom: 4rem;
+}
+
+.post-container-row span pre {
+    padding: 0 1rem;
+    font-family: inherit;
+}
+
+.post-container-row {
+    position: relative;
+}
+
+.post-container-buttons {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 1rem;
+}
+
+.post-container-buttons button {
+    background-color: var(--dark-color);
+    color: var(--link-color);
+    border: 2px solid rgba(0, 0, 0, 0);
+    font-weight: 600;
+    padding: 0.5rem;
+    transition: color, background-color 0.25s ease-in;
+}
+
+.post-container-buttons button:hover,
+.post-container-buttons button:focus {
+    background-color: var(--divgb-color);
+    color: var(--hover-color);
+    border: 2px solid var(--base-color);
+    cursor: pointer;
+}
+
+.dashboard-container-col {
+    display: flex;
+}
+
+.dashboard-container-col {
+    display: flex;
+    justify-content: space-around;
+}
+
+.dashboard-container-col div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0.5rem;
+    background-color: rgb(235, 229, 253);
+    border: 1px solid var(--base-color);
+    border-radius: 1em;
+}
+
+.dashboard-container-col div h3 {
+    text-align: center;
+}
+
+.dashboard-container-col div ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dashboard-container-col div > ul > li {
+    position: relative;
+    display: block;
+    color: var(--light-color);
+    background-color: var(--base-color);
+    border-radius: 1rem;
+    padding: 0.5rem 0 0.5rem 1rem;
+    margin: 0.5rem 0.5rem;
+}
+
+.user-comment-list li {
+    color: var(--base-color);
+    background-color: var(--light-color);
+    margin: 0.5rem 1rem 0.5 0;
+    padding-left: 1rem;
+    border-radius: 1rem;
+}
+
+.user-comment-list .delete-btn {
+    margin-right: 0;
+}
+
+.dashboard-container-col .change-avatar {
+    align-items: center;
+}
+
+.dashboard-container-col div img {
+    border-radius: 50%;
+    width: 50%;
+    padding-bottom: 1rem;
+}
+
+.change-avatar form fieldset,
+.new-password form fieldset {
+    border: 2px solid rgba(0, 0, 0, 0);
+}
+
+.change-avatar form label,
+.new-password form label {
+    font-weight: 600;
+}
+
+.change-avatar input[type="text"],
+.new-password input[type="text"] {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+@media screen and (max-width: 55rem) {
+    nav {
+        position: relative;
+    }
+
+    nav ul {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav li:not(:last-child) {
+        padding: 0.5rem 0;
+        border-bottom: 1px solid var(--base-color);
+    }
+
+    nav li:not(:last-child)::after {
+        content: " ";
+        margin: 0;
+    }
+
+    .dashboard-container-col {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dashboard-container-col div {
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+        margin: 0.5rem;
+        background-color: rgb(235, 229, 253);
+        border: 1px solid var(--base-color);
+        border-radius: 1em;
+    }
+}
+
+/* forms */
+
+.topic-form,
+.post-form,
+.comment-form {
+    display: none;
+    width: 100%;
+    height: fit-content;
+    margin: 0;
+}
+
+.topic-form form,
+.comment-form form,
+.post-form form {
+    display: block;
+    width: 100vw;
+    height: fit-content;
+    margin: 0;
+}
+
+.topic-form fieldset,
+.comment-form fieldset,
+.post-form fieldset {
+    background-color: var(--base-color);
+    border: 2px solid var(--dark-color);
+    border-radius: 1em;
+    padding: 1rem;
+}
+
+.post-form form label,
+.topic-form form label,
+.comment-form form label {
+    font-weight: 600;
+    color: var(--light-color);
+}
+
+.post-form input[type="text"],
+.topic-form input[type="text"],
+.post-form input[type="text"] {
+    width: 100%;
+    margin: 0.8rem 0;
+    height: 1.5rem;
+}
+
+.comment-form textarea,
+.post-form textarea {
+    width: 100%;
+    margin: 0.8rem 0;
+    height: 10rem;
+}
+
+.topic-form input[type="text"]:focus,
+.post-form input[type="text"]:focus,
+.post-form textarea:focus,
+.comment-form textarea:focus {
+    border: 2px solid var(--dark-color);
+}
+
+input[type="submit"],
+input[type="button"] {
+    background-color: var(--dark-color);
+    color: var(--link-color);
+    border: 2px solid rgba(0, 0, 0, 0);
+    font-weight: 600;
+    margin-left: 0.5rem;
+    padding: 0.5rem;
+    float: right;
+    transition: color, background-color 0.25s ease-in;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+input[type="button"]:hover,
+input[type="button"]:focus {
+    background-color: var(--light-color);
+    color: var(--hover-color);
+    border: 2px solid var(--dark-color);
+    cursor: pointer;
+}
+
+/* User form Styles */
+.user-form {
+    display: block;
+    align-items: center;
+    width: 80vw;
+    height: fit-content;
+    background-color: var(--light-color);
+    border: 1px solid var(--base-color);
+    border-radius: 1rem;
+    padding: 0.5rem 0 1rem;
+}
+
+.user-form fieldset {
+    height: 75%;
+    border: 2px groove var(--dark-color);
+    margin: 1rem;
+}
+
+.user-form legend {
+    border: 2px groove var(--dark-color);
+    font-size: 1.5rem;
+    padding: 0 0.5rem 0.5rem;
+    font-weight: 600;
+}
+
+.user-form form label {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.user-form form input {
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: initial;
+}
+
+.user-form form input:focus {
+    border: 2px solid var(--dark-color);
+}
+
+/* All Form Button Styles */
+.user-form form input[type="submit"] {
+    background-color: var(--dark-color);
+    color: var(--link-color);
+    font-weight: 600;
+    border: 2px solid rgba(0, 0, 0, 0);
+    margin: 0.3rem 0.5rem;
+    width: 35%;
+    float: right;
+    transition: color, background-color 0.25s ease-in;
+}
+
+.user-form form input[type="submit"]:hover,
+.user-form form input[type="submit"]:focus {
+    background-color: var(--divgb-color);
+    color: var(--hover-color);
+    border: 2px solid var(--base-color);
+    cursor: pointer;
 }
 
 /* Modal Styles */
@@ -167,7 +589,7 @@ section {
 }
 
 .modal-container {
-    background-color: var(--divbg-color);
+    background-color: var(--light-color);
     border: 1px solid var(--dark-color);
     box-shadow: 0.25rem 0.25rem 0 -0.1rem rgb(95, 95, 95);
     padding: 0;
@@ -181,7 +603,7 @@ section {
     align-items: center;
     margin-bottom: 1rem;
     border-bottom: 2px solid var(--dark-color);
-    background-color: var(--divbg-color);
+    background-color: var(--light-color);
 }
 
 .modal-header h2 {

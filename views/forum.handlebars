@@ -1,0 +1,64 @@
+<section>
+    <div class="main-container">
+        <div class="main-container-header">
+            <span>
+                Posts
+                {{#if user}}
+                    <button class="add-btn" id="add-post"></button>
+                {{/if}}
+            </span>
+            <span>Replys</span>
+            <span>Last Reply</span>
+        </div>
+        {{#if user.is_admin}}
+            <div class="post-form">
+                <form>
+                    <fieldset>
+                        <label for="topic-subject">Create Post</label>
+                        <input
+                            type="text"
+                            id="post-subject"
+                            name="post-subject"
+                        />
+                        <label for="post-content">Content</label>
+                        <textarea id="post-content"></textarea>
+                        <input type="submit" value="Submit" />
+                        <input type="button" value="Dismiss" />
+                    </fieldset>
+                </form>
+            </div>
+        {{/if}}
+        {{#each posts as |post|}}
+            <div class="main-container-row">
+                <span>
+                    <a
+                        href="/topic/{{post.topic_id}}/post/{{post.id}}"
+                    >{{post.subject}}</a>
+                    <br />
+                    Posted by
+                    {{post.poster.username}}
+                    on
+                    {{format_datetime post.createdAt}}
+
+                </span>
+                <span>{{post.reply_count}}</span>
+                {{#if post.comments}}
+                    {{#each post.comments as |comment|}}
+                        <span><a
+                                href="/topic/{{post.topic_id}}/post/{{post.id}}/#comment{{comment.id}}"
+                            >Last Reply</a><br />
+                            by
+                            {{comment.commentor.username}}<br
+                            />{{format_datetime comment.createdAt}}
+                        </span>
+                    {{/each}}
+                {{else}}
+                    <span></span>
+                {{/if}}
+            </div>
+        {{/each}}
+    </div>
+</section>
+{{#if user}}
+    <script src="/js/post.js"></script>
+{{/if}}

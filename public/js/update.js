@@ -8,7 +8,7 @@ const updatePassFormHandler = async (event) => {
 
     if (currentPassword && newPassword) {
         // call login API
-        const response = await fetch("/api/users/updatepass", {
+        const response = await fetch("/api/user/updatepass", {
             method: "PATCH",
             body: JSON.stringify({ currentPassword, newPassword }),
             headers: { "Content-Type": "application/json" },
@@ -28,7 +28,7 @@ const updatePassFormHandler = async (event) => {
 }
 
 document
-    .querySelector("#update-pass-form")
+    .querySelector("#password-form")
     .addEventListener("submit", updatePassFormHandler)
 
 const updateAvatarFormHandler = async (event) => {
@@ -38,7 +38,7 @@ const updateAvatarFormHandler = async (event) => {
 
     if (avatar) {
         // call login API
-        const response = await fetch("/api/users/updateavatar", {
+        const response = await fetch("/api/user/updateavatar", {
             method: "PATCH",
             body: JSON.stringify({ avatar }),
             headers: { "Content-Type": "application/json" },
@@ -58,5 +58,5 @@ const updateAvatarFormHandler = async (event) => {
 }
 
 document
-    .querySelector("#update-avatar-form")
+    .querySelector("#avatar-form")
     .addEventListener("submit", updateAvatarFormHandler)

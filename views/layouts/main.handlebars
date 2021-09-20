@@ -3,6 +3,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/css/normalize.css" />
         <link rel="stylesheet" href="/css/styles.css" />
         <title>NodeBBS</title>
     </head>
@@ -15,21 +16,16 @@
                 </header>
                 <nav>
                     <ul>
-                        <li><a href="#Home">Home</a></li>
-                        {{#if logged_in}}
-                            <li><a href="#user-dashboard">User Dashboard</a></li>
-                            <li><a href="#Logout">Logout</a></li>
+                        <li><a href="/">Home</a></li>
+                        {{#if user}}
+                            <li><a href="/user-dashboard">User Dashboard</a></li>
+                            {{#if user.is_admin}}
+                                <li><a href="/admin-dashboard">Admin Dashboard</a></li>
+                            {{/if}}
+                            <li><a href="#logout" id="logout">Logout</a></li>
                         {{else}}
-                            <li><a href="#sign-up">Sign Up</a></li>
-                            <li><a href="#Login">Login</a></li>
-                        {{/if}}
-                        {{#if (and isAdmin logged_in)}}
-                            <li><a href="#user-dashboard">User Dashboard</a></li>
-                            <li><a href="#admin-dashboard">Admin Dashboard</a></li>
-                            <li><a href="#Logout">Logout</a></li>
-                        {{else}}
-                            <li><a href="#sign-up">Sign Up</a></li>
-                            <li><a href="#Login">Login</a></li>
+                            <li><a href="/signup">Sign Up</a></li>
+                            <li><a href="/login">Login</a></li>
                         {{/if}}
                     </ul>
                 </nav>
@@ -37,6 +33,16 @@
             <main>
                 {{{body}}}
             </main>
+            {{#if user.last_login}}
+                <footer>
+                    <div class="user-last-login">
+                        <span>Welcome back
+                            {{user.username}}
+                            you last logged in
+                            {{format_datetime user.last_login}}</span>
+                    </div>
+                </footer>
+            {{/if}}
         </div>
         <div id="modal" class="modal">
             <div class="modal-container">
@@ -47,6 +53,8 @@
                 <div id="modal-content">Content</div>
             </div>
         </div>
-        <script src="./js/scripts.js"></script>
+        {{#if user}}
+            <script src="/js/logout.js"></script>
+        {{/if}}
     </body>
 </html>

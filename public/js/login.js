@@ -6,20 +6,20 @@ const loginFormHandler = async (event) => {
 
     if (username && password) {
         // call login API
-        const response = await fetch("/api/users/login", {
+        const response = await fetch("/api/user/login", {
             method: "POST",
             body: JSON.stringify({ username, password }),
             headers: { "Content-Type": "application/json" },
         })
 
         if (response.ok) {
-            document.location.replace("/users/")
+            document.location.assign("/")
         } else {
             const errMsg = await response.json((msg) => JSON.parse(msg))
             if ("errors" in errMsg) {
                 displayModal(errMsg.errors[0].message)
             } else {
-                displayModal(errMsg)
+                displayModal("Error in Submission")
             }
         }
     } else {
