@@ -32,18 +32,25 @@ Once downloaded install the dependencies with NPM
 ```terminal
 npm install
 ```
+## Environment Setup
 
 You will also need to edit the .env.EXAMPLE file to .env with the following
 
+### Development
 > DBNAME - _The database Name_
 >
 > DBUSER - _Your server or database Username_
 >
 > DBPASS - _Your server or database password_
->
+
+### Required
 > CSECRET - _Random characters for the Session Cookie Secret_
 >
 > ADMINPASS= _Set the initial Administrator Password_
+
+### Live
+
+> DB_URL - _If your using a cloud hosted DB Url_
 
 Once you .env is setup you should be able to run the server
 
