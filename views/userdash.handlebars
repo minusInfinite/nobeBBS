@@ -7,28 +7,23 @@
     <div class="dashboard-container-col">
         <div id="user-post-list">
             <h3>Posts and Comments</h3>
+            {{log posts}}
             {{#if posts}}
-                <ul>
-                    {{#each posts as |post|}}
+            <ul>
+                {{#each posts as |post|}}
+                <li>
+                    {{post.subject}}<button data-post="{{post.id}}" class="delete-btn"></button>
+                    <ul class="user-comment-list">
+                        {{#each comments as |comment|}}
                         <li>
-                            {{post.subject}}<button
-                                data-post="{{post.id}}"
-                                class="delete-btn"
-                            ></button>
-                            <ul class="user-comment-list">
-                                {{#each comments as |comment|}}
-                                    <li>
-                                        comment on Post
-                                        <button
-                                            data-comment="{{comment.id}}"
-                                            class="delete-btn"
-                                        ></button>
-                                    </li>
-                                {{/each}}
-                            </ul>
+                            comment on Post
+                            <button data-comment="{{comment.id}}" class="delete-btn"></button>
                         </li>
-                    {{/each}}
-                </ul>
+                        {{/each}}
+                    </ul>
+                </li>
+                {{/each}}
+            </ul>
             {{/if}}
         </div>
         <div class="change-avatar">

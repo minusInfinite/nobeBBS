@@ -3,7 +3,12 @@ const { Topic, Post, User, Comment } = require("../models")
 const { isAuth, isAdmin } = require("./middleware/auth")
 const sequelize = require("../config/connection")
 
-router.get("/", async (req, res) => {
+router.use((err, req, res, next) => {
+    console.error(err)
+    res.status(500).send('opps')
+})
+
+router.get("/", async (req, res, next) => {
     try {
         const topicData = await Topic.findAll({
             // INCLUDE ALL POSTS THAT BELONG TO TOPIC
@@ -28,7 +33,7 @@ router.get("/", async (req, res) => {
                 },
             ],
             order: [[Post, "created_at", "DESC"]],
-            group: ["Topic.id"],
+            group: ["topic.id", "posts.id", "posts.poster.id"],
         })
 
         const topics = topicData.map((topic) => topic.get({ plain: true }))
@@ -37,12 +42,13 @@ router.get("/", async (req, res) => {
             user: req.user,
         })
     } catch (err) {
-        res.status(500).json(err)
+        console.log(err)
+        next(err)
     }
 })
 
 // FIND POST BY TOPIC BY ID
-router.get("/topic/:topic_id", async (req, res) => {
+router.get("/topic/:topic_id", async (req, res, next) => {
     try {
         const postsData = await Post.findAll({
             where: { topic_id: req.params.topic_id },
@@ -71,7 +77,7 @@ router.get("/topic/:topic_id", async (req, res) => {
                 { model: User, attributes: ["username"], as: "poster" },
             ],
             order: [[Comment, "created_at", "DESC"]],
-            group: ["Post.id"],
+            group: ["post.id", "poster.id", "comments.id", "comments.commentor.id"],
         })
 
         const posts = postsData.map((post) => post.get({ plain: true }))
@@ -81,11 +87,12 @@ router.get("/topic/:topic_id", async (req, res) => {
             user: req.user,
         })
     } catch (err) {
-        res.status(500).json(err)
+        console.log(err)
+        next(err)
     }
 })
 
-router.get("/topic/:topic_id/post/:post_id", async (req, res) => {
+router.get("/topic/:topic_id/post/:post_id", async (req, res, next) => {
     try {
         const topicSubject = await Topic.findOne({
             where: { id: req.params.topic_id },
@@ -127,11 +134,12 @@ router.get("/topic/:topic_id/post/:post_id", async (req, res) => {
             user: req.user,
         })
     } catch (err) {
-        res.status(500).json(err)
+        console.log(err)
+        next(err)
     }
 })
 
-router.get("/user-dashboard", isAuth, async (req, res) => {
+router.get("/user-dashboard", isAuth, async (req, res, next) => {
     try {
         const userPosts = await Post.findAll({
             where: { user_id: req.user.id },
@@ -150,7 +158,7 @@ router.get("/user-dashboard", isAuth, async (req, res) => {
         })
     } catch (err) {
         console.log(err)
-        res.status(500).json(err)
+        next(err)
     }
 })
 

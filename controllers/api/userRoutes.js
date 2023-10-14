@@ -103,9 +103,12 @@ router.patch("/updateavatar", isAuth, async (req, res) => {
     }
 })
 
-router.post("/logout", (req, res) => {
+router.post("/logout", (req, res, next) => {
     User.update({ last_login: Date.now() }, { where: { id: req.user.id } })
-    req.logout()
+    req.logout((err) => {
+        if (err) { return next(err) }
+        return
+    })
     req.session.destroy((err) => {
         if (err) {
             return res.status(404).end()

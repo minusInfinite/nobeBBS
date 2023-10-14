@@ -13,6 +13,16 @@ User.hasMany(Comment, {
     onDelete: "CASCADE",
 })
 
+Post.hasMany(Comment, {
+    foreignKey: "post_id",
+    onDelete: "CASCADE"
+})
+
+Topic.hasMany(Post, {
+    foreignKey: "topic_id",
+    onDelete: "CASCADE",
+})
+
 Post.belongsTo(User, {
     foreignKey: "user_id",
     as: "poster",
@@ -20,10 +30,7 @@ Post.belongsTo(User, {
 
 Post.belongsTo(Topic, {
     foreignKey: "topic_id",
-})
-
-Post.hasMany(Comment, {
-    foreignKey: "post_id",
+    as: "posts"
 })
 
 Comment.belongsTo(User, {
@@ -33,11 +40,7 @@ Comment.belongsTo(User, {
 
 Comment.belongsTo(Post, {
     foreignKey: "post_id",
-})
-
-Topic.hasMany(Post, {
-    foreignKey: "topic_id",
-    onDelete: "CASCADE",
+    as: "comments"
 })
 
 module.exports = { User, Topic, Post, Comment }
