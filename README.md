@@ -2,7 +2,7 @@
 
 A Modern Bulletin Board System in Node JS and Express with a Classic look
 
-[Live Demo](https://nodebbs-demo.herokuapp.com/)
+[Live Demo](https://nobebbs.onrender.com/)
 
 ## Contents
 
@@ -32,11 +32,13 @@ Once downloaded install the dependencies with NPM
 ```terminal
 npm install
 ```
+
 ## Environment Setup
 
 You will also need to edit the .env.EXAMPLE file to .env with the following
 
 ### Development
+>
 > DBNAME - _The database Name_
 >
 > DBUSER - _Your server or database Username_
@@ -44,6 +46,7 @@ You will also need to edit the .env.EXAMPLE file to .env with the following
 > DBPASS - _Your server or database password_
 
 ### Required
+>
 > CSECRET - _Random characters for the Session Cookie Secret_
 >
 > ADMINPASS= _Set the initial Administrator Password_
@@ -66,10 +69,10 @@ npm run dev
 
 ## To-Do
 
--   Create the Admin Dashboard for full forum management.
--   Add some kind of WYSIWYG editor
--   Sanatise text input from code injection.
--   If you would like to add features please raise an issue or PR.
+- Create the Admin Dashboard for full forum management.
+- Add some kind of WYSIWYG editor
+- Sanatise text input from code injection.
+- If you would like to add features please raise an issue or PR.
 
 ## Example
 
