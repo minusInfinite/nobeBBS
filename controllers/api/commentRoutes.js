@@ -1,7 +1,7 @@
-const router = require("express").Router()
-const { Comment } = require("../../models")
-const { isAuth, isAdmin } = require("../middleware/auth")
-
+import express from "express";
+import { Comment } from "../../models/index.js";
+import { isAuth, isAdmin } from "../middleware/auth.js";
+const router = express.Router();
 // CREATE new comments
 router.post("/", isAuth, async (req, res) => {
     // check session
@@ -11,13 +11,13 @@ router.post("/", isAuth, async (req, res) => {
             post_id: req.body.post_id,
             // use the id from the session
             user_id: req.user.id,
-        })
-        res.status(201).json(newComment)
-    } catch (err) {
-        res.status(400).json(err)
+        });
+        res.status(201).json(newComment);
     }
-})
-
+    catch (err) {
+        res.status(400).json(err);
+    }
+});
 // DELETE COMMENT
 router.delete("/:id", isAuth, (req, res) => {
     Comment.destroy({
@@ -27,17 +27,16 @@ router.delete("/:id", isAuth, (req, res) => {
         },
     })
         .then((dbCommentData) => {
-            if (!dbCommentData) {
-                res.status(404).json({
-                    message: "No comment found with this id",
-                })
-                return
-            }
-            res.json(dbCommentData)
-        })
+        if (!dbCommentData) {
+            res.status(404).json({
+                message: "No comment found with this id",
+            });
+            return;
+        }
+        res.json(dbCommentData);
+    })
         .catch((err) => {
-            res.status(500).json(err)
-        })
-})
-
-module.exports = router
+        res.status(500).json(err);
+    });
+});
+export default router;

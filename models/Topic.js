@@ -1,27 +1,22 @@
-const { Model, DataTypes } = require("sequelize")
-const sequelize = require("../config/connection")
-
-class Topic extends Model {}
-
-Topic.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        subject: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
+import { Model, DataTypes } from "sequelize";
+import sequelize from "../config/connection.js";
+class Topic extends Model {
+}
+Topic.init({
+    id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
     },
-    {
-        sequelize,
-        freezeTableName: true,
-        underscored: true,
-        modelName: "topic",
-    }
-)
-
-module.exports = Topic
+    subject: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+}, {
+    sequelize,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "topic",
+});
+export default Topic;
