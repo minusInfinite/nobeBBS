@@ -1,60 +1,66 @@
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="/css/normalize.css" />
-        <link rel="stylesheet" href="/css/styles.css" />
-        <title>NodeBBS</title>
-    </head>
-    <body>
-        <script src="/js/modal.js"></script>
-        <div class="wrap">
-            <div class="header-container">
-                <header>
-                    <h1>NodeBBS</h1>
-                </header>
-                <nav>
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        {{#if user}}
-                            <li><a href="/user-dashboard">User Dashboard</a></li>
-                            {{#if user.is_admin}}
-                                <li><a href="/admin-dashboard">Admin Dashboard</a></li>
-                            {{/if}}
-                            <li><a href="#logout" id="logout">Logout</a></li>
-                        {{else}}
-                            <li><a href="/signup">Sign Up</a></li>
-                            <li><a href="/login">Login</a></li>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {{#if _csrf}}
+        <meta name="csrf-token" content="{{_csrf}}" />
+    {{/if}}
+    <link rel="stylesheet" href="/css/normalize.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>NodeBBS</title>
+</head>
+
+<body>
+    <script src="/js/modal.js"></script>
+    <div class="wrap">
+        <div class="header-container">
+            <header>
+                <h1>NodeBBS</h1>
+            </header>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    {{#if user}}
+                        <li><a href="/user-dashboard">User Dashboard</a></li>
+                        {{#if user.is_admin}}
+                            <li><a href="/admin-dashboard">Admin Dashboard</a></li>
                         {{/if}}
-                    </ul>
-                </nav>
-            </div>
-            <main>
-                {{{body}}}
-            </main>
-            {{#if user.last_login}}
-                <footer>
-                    <div class="user-last-login">
-                        <span>Welcome back
-                            {{user.username}}
-                            you last logged in
-                            {{format_datetime user.last_login}}</span>
-                    </div>
-                </footer>
-            {{/if}}
+                        <li><a href="#logout" id="logout">Logout</a></li>
+                    {{else}}
+                        <li><a href="/signup">Sign Up</a></li>
+                        <li><a href="/login">Login</a></li>
+                    {{/if}}
+                </ul>
+            </nav>
         </div>
-        <div id="modal" class="modal">
-            <div class="modal-container">
-                <div class="modal-header">
-                    <h2 id="modal-header-message">Prompt</h2>
-                    <span class="modal-close">&times;</span>
+        <main>
+            {{{body}}}
+        </main>
+        {{#if user.last_login}}
+            <footer>
+                <div class="user-last-login">
+                    <span>Welcome back
+                        {{user.username}}
+                        you last logged in
+                        {{format_datetime user.last_login}}</span>
                 </div>
-                <div id="modal-content"></div>
-            </div>
-        </div>
-        {{#if user}}
-            <script src="/js/logout.js"></script>
+            </footer>
         {{/if}}
-    </body>
+    </div>
+    <div id="modal" class="modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 id="modal-header-message">Prompt</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div id="modal-content"></div>
+        </div>
+    </div>
+    {{#if user}}
+        <script src="/js/logout.js"></script>
+    {{/if}}
+</body>
+
 </html>

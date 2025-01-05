@@ -1,4 +1,5 @@
-const { User } = require("../models")
+import prisma from "../config/connection.js";
+import { User } from "../models/index.js";
 
 /**
  *
@@ -8,29 +9,26 @@ const { User } = require("../models")
  */
 const makeAdmin = async (req, res, next) => {
     try {
-        const adminPass = process.env.ADMINPASS
-        const hasAdmin = await User.findOne({
+        const adminPass = process.env.ADMINPASS;
+        const hasAdmin = await prisma.user.findUnique({
             where: { username: "administrator" },
-        })
-
+        });
         if (!hasAdmin) {
-            await User.create(
-                {
-                    username: "administrator",
-                    password: adminPass,
-                    is_admin: true,
-                    avatar: "/img/default_avatar.png",
-                },
-                { individualHooks: true }
-            )
-            console.log("Admin created")
+            await User.create({
+                username: "administrator",
+                password: adminPass,
+                is_admin: true,
+                avatar: "/img/default_avatar.png",
+            }, { individualHooks: true });
+            console.log("Admin created");
         }
-    } catch (err) {
-        console.log(err)
-        next()
-    } finally {
-        next()
     }
-}
-
-module.exports = makeAdmin
+    catch (err) {
+        console.log(err);
+        next();
+    }
+    finally {
+        next();
+    }
+};
+export default makeAdmin;

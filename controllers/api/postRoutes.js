@@ -1,43 +1,40 @@
-const router = require("express").Router()
-const { Post, Comment } = require("../../models")
-const { isAuth } = require("../middleware/auth")
-
+import express from "express";
+import { Post, Comment } from "../../models/index.js";
+import { isAuth } from "../middleware/auth.js";
+const router = express.Router();
 // create new post
 router.post("/", async (req, res) => {
     try {
         const newPost = await Post.create({
             ...req.body,
             user_id: req.user.id,
-        })
-
-        res.status(200).json(newPost)
-    } catch (error) {
-        res.status(400).json(error)
+        });
+        res.status(200).json(newPost);
     }
-})
+    catch (error) {
+        res.status(400).json(error);
+    }
+});
 // edit a post
 router.post("/edit/:id", async (req, res) => {
     try {
-        await Post.update(
-            { subject: req.body.subject, content: req.body.content },
-            { where: { id: req.params.id } }
-        )
-        res.status(200).json({ msg: "success" })
-    } catch (error) {
-        res.status(400).json(error)
+        await Post.update({ subject: req.body.subject, content: req.body.content }, { where: { id: req.params.id } });
+        res.status(200).json({ msg: "success" });
     }
-})
-
+    catch (error) {
+        res.status(400).json(error);
+    }
+});
 // get post by ID
 router.get("/:id", async (req, res) => {
     try {
-        const post = await Post.findByPk(req.params.id)
-        res.status(200).json(post)
-    } catch (error) {
-        res.status(400).json(error)
+        const post = await Post.findByPk(req.params.id);
+        res.status(200).json(post);
     }
-})
-
+    catch (error) {
+        res.status(400).json(error);
+    }
+});
 router.delete("/:id", isAuth, (req, res) => {
     Post.destroy({
         where: {
@@ -46,15 +43,14 @@ router.delete("/:id", isAuth, (req, res) => {
         },
     })
         .then((dbPostData) => {
-            if (!dbPostData) {
-                res.status(404).json({ message: "No post found with this id" })
-                return
-            }
-            res.json(dbPostData)
-        })
+        if (!dbPostData) {
+            res.status(404).json({ message: "No post found with this id" });
+            return;
+        }
+        res.json(dbPostData);
+    })
         .catch((err) => {
-            res.status(500).json(err)
-        })
-})
-
-module.exports = router
+        res.status(500).json(err);
+    });
+});
+export default router;

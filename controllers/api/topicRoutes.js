@@ -1,8 +1,8 @@
-const router = require("express").Router()
-const { Topic, Post, User } = require("../../models")
-const { isAuth, isAdmin } = require("../middleware/auth")
-const sequelize = require("../../config/connection")
-
+import express from "express";
+import { Topic, Post, User } from "../../models/index.js";
+import { isAuth, isAdmin } from "../middleware/auth.js";
+import sequelize from "../../config/connection.js";
+const router = express.Router();
 // CREATE A TOPIC, MUST BE LOGGED IN AS ADMIN
 router.post("/", isAdmin, (req, res) => {
     Topic.create({
@@ -10,34 +10,29 @@ router.post("/", isAdmin, (req, res) => {
     })
         .then((dbPostData) => res.json(dbPostData))
         .catch((err) => {
-            res.status(500).json(err)
-        })
-})
-
+        res.status(500).json(err);
+    });
+});
 // EDIT A TOPIC, MUST BE LOGGED IN AS ADMIN
 router.put("/:id", isAdmin, (req, res) => {
-    Topic.update(
-        {
-            subject: req.body.subject,
+    Topic.update({
+        subject: req.body.subject,
+    }, {
+        where: {
+            id: req.params.id,
         },
-        {
-            where: {
-                id: req.params.id,
-            },
-        }
-    )
+    })
         .then((dbPostData) => {
-            if (!dbPostData) {
-                res.status(404).json({ message: "No post found with this id" })
-                return
-            }
-            res.json(dbPostData)
-        })
+        if (!dbPostData) {
+            res.status(404).json({ message: "No post found with this id" });
+            return;
+        }
+        res.json(dbPostData);
+    })
         .catch((err) => {
-            res.status(500).json(err)
-        })
-})
-
+        res.status(500).json(err);
+    });
+});
 // DELETE TOPIC, MUST BE LOGGED IN AS ADMIN
 router.delete("/:id", isAdmin, (req, res) => {
     Topic.destroy({
@@ -46,15 +41,14 @@ router.delete("/:id", isAdmin, (req, res) => {
         },
     })
         .then((dbPostData) => {
-            if (!dbPostData) {
-                res.status(404).json({ message: "No post found with this id" })
-                return
-            }
-            res.json(dbPostData)
-        })
+        if (!dbPostData) {
+            res.status(404).json({ message: "No post found with this id" });
+            return;
+        }
+        res.json(dbPostData);
+    })
         .catch((err) => {
-            res.status(500).json(err)
-        })
-})
-
-module.exports = router
+        res.status(500).json(err);
+    });
+});
+export default router;

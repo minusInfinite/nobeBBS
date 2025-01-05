@@ -1,21 +1,8 @@
-const Sequelize = require("sequelize")
-require("dotenv").config()
+import { PrismaClient } from "../prisma/.generated/client";
+import bcrypt from "bcrypt"
 
-let sequelize
+const prisma = new PrismaClient({
+    log: ["query"]
+});
 
-if (process.env.DB_URL) {
-    sequelize = new Sequelize(process.env.DB_URL)
-} else {
-    sequelize = new Sequelize(
-        process.env.DBNAME,
-        process.env.DBUSER,
-        process.env.DBPASS,
-        {
-            host: "localhost",
-            dialect: "postgres",
-            port: 5432,
-        }
-    )
-}
-
-module.exports = sequelize
+export default prisma;
