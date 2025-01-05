@@ -1,0 +1,32 @@
+# Exported from Render on 2025-01-05T06:32:04Z
+databases:
+- name: nodebbs-demo-db
+  databaseName: nodebbs_demo_db
+  user: nodebbs_demo_db_user
+  plan: free
+  region: singapore
+  ipAllowList:
+  - source: 0.0.0.0/0
+    description: everywhere
+  postgresMajorVersion: "16"
+services:
+- type: web
+  name: nobebbs
+  runtime: node
+  repo: https://github.com/minusInfinite/nobeBBS
+  plan: free
+  envVars:
+  - key: SKIP_INSTALL_DEPS
+    sync: false
+  - key: NODE_VERSION
+    sync: false
+  - key: .env
+    sync: false
+  - key: DATABASE_URL
+    fromDatabase:
+      name: nodebbs-demo-db
+      property: connectionString
+  region: singapore
+  buildCommand: corepack enable
+  startCommand: yarn; yarn start;
+version: "1"
