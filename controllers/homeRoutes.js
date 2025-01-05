@@ -3,6 +3,7 @@ const { Topic, Post, User, Comment } = require("../models")
 const { isAuth, isAdmin } = require("./middleware/auth")
 const sequelize = require("../config/connection")
 
+
 router.use((err, req, res, next) => {
     console.error(err)
     res.status(500).send('opps')
@@ -141,16 +142,25 @@ router.get("/topic/:topic_id/post/:post_id", async (req, res, next) => {
 
 router.get("/user-dashboard", isAuth, async (req, res, next) => {
     try {
-        const userPosts = await Post.findAll({
-            where: { user_id: req.user.id },
-            include: [
-                {
-                    model: Comment,
-                },
-            ],
+        const { id } = req.user
+        const userData = await User.findByPk(id, {
+            attributes: { exclude: ['password'] },
+            include: { model: Post },
         })
 
-        const posts = userPosts.map((post) => post.get({ plain: true }))
+        const getComments = await Post.findAll({
+            include: {
+                model: Comment,
+                where: { user_id: id }
+            }
+        }
+        )
+
+        const userPosts = userData.dataValues.posts
+        const userComment = getComments.map((post) => post.get({ plain: true }))
+
+        /** @type {Array} */
+        const posts = userPosts.map((post) => post.get({ plain: true })).concat(userComment)
 
         res.render("userdash", {
             posts,

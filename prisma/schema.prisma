@@ -1,0 +1,76 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = ".generated/client"
+  previewFeatures = ["omitApi"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Sessions {
+  sid       String    @id @db.VarChar(36)
+  expires   DateTime? @db.Timestamptz(6)
+  data      String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Session {
+  id        String   @id
+  sid       String   @unique
+  data      String?
+  expiresAt DateTime
+}
+
+model Comment {
+  id          Int      @id @default(autoincrement())
+  commentText String   @map("comment_text")
+  userId      String   @map("user_id") @db.Uuid
+  postId      Int      @map("post_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  commentor   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("comment")
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  subject   String    @db.VarChar(50)
+  content   String
+  topicId   Int       @map("topic_id")
+  userId    String    @map("user_id") @db.Uuid
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  comments  Comment[]
+  topic     Topic     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  poster    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("post")
+}
+
+model Topic {
+  id        Int      @id @default(autoincrement())
+  subject   String   @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  posts     Post[]
+
+  @@map("topic")
+}
+
+model User {
+  id        String    @id @db.Uuid
+  username  String    @unique @db.VarChar(30)
+  password  String    @db.VarChar(255)
+  isAdmin   Boolean   @default(false) @map("is_admin")
+  lastLogin DateTime? @map("last_login") @db.Timestamptz(6)
+  avatar    String    @default("/img/default_avatar.png") @db.VarChar(255)
+  comments  Comment[]
+  posts     Post[]
+
+  @@map("user")
+}

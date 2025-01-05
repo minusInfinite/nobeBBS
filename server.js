@@ -54,6 +54,20 @@ if (!process.env.VERCEL) {
 // passport auth
 require("./config/passport")
 
+const regeneration = cb => {
+    cb()
+}
+
+const save = cb => {
+    cb()
+}
+
+app.use((req, res, next) => {
+    req.session.regeneration = regeneration
+    req.session.save = save
+    next()
+})
+
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(routes)

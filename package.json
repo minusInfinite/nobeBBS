@@ -1,6 +1,9 @@
 {
     "name": "project-2",
     "version": "0.1.0",
+    "engines": {
+        "node": ">=18"
+    },
     "description": "A Modern Bulletin Board System in Node JS and Express",
     "main": "server.js",
     "scripts": {
@@ -39,7 +42,8 @@
         "@types/passport": "^1.0.13",
         "eslint": "^7.32.0",
         "nodemon": "^3.0.1",
-        "prettier": "^2.8.8"
+        "prettier": "^2.8.8",
+        "typescript": "^5.7.2"
     },
     "packageManager": "yarn@4.6.0+sha512.5383cc12567a95f1d668fbe762dfe0075c595b4bfff433be478dbbe24e05251a8e8c3eb992a986667c1d53b6c3a9c85b8398c35a960587fbd9fa3a0915406728"
 }
