@@ -151,17 +151,33 @@ router.get("/topic/:topicId/post/:postId", async (req, res, next) => {
 
 router.get("/user-dashboard", isAuth, async (req, res, next) => {
     try {
-
-        const userPosts = await prisma.post.findMany({
-            where: { userId: req.user.id },
-            include:
-            {
-                comments: true
+        const { id } = req.user
+        const userData = await prisma.user.findUnique({
+            where: { id: id },
+            select: {
+                id: true,
+                posts: {
+                    select: {
+                        comments: {
+                            where: { commentor: id }
+                        }
+                    }
+                }
             },
 
-        });
+        })
 
-        const posts = userPosts.map((post) => post);
+        const userCommentsOnPost = await prisma.post.findMany({
+            include: {
+                comments: {
+                    where: {
+                        commentor: id
+                    }
+                }
+            }
+        })
+
+        const posts = Array.prototype.concat(userData.posts, userCommentsOnPost)
 
         res.render("userdash", {
             posts,

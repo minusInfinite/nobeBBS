@@ -17,5 +17,38 @@ export default class User {
     async findById(id) {
         return await this.db.user.findUnique({ where: { id } })
     }
+
+    async getRole(id) {
+        return await this.db.user.findUnique({
+            where: { id: id },
+            select: {
+                id: true,
+                isAdmin: true
+            }
+        })
+    }
+
+    async validatePassword(passString, passhash) {
+        return await bcrypt.compare(passString, passhash)
+    }
+
+    async save(data) {
+        return await this.db.user.update({
+            where: {
+                id: data.id
+            },
+            data: data
+        })
+    }
+
+    async logOut(id) {
+        await this.db.user.update({
+            where: { id: id },
+            data: {
+                lastLogin: new Date().toISOString()
+            }
+        })
+
+    }
 }
 
