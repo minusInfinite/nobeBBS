@@ -76,6 +76,6 @@ npm run dev
 
 ## Example
 
-[Live Demo](https://nodebbs-demo.herokuapp.com/)
+[Live Demo](https://nobebbs.onrender.com/)
 
 ![Animated Demo GIF](/mdassets/nodebbs-demo.gif)
