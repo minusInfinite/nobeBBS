@@ -6,7 +6,10 @@ let sequelize
 if (process.env.DATABASE_URL || process.env.DB_URL) {
     sequelize = new Sequelize(process.env.DATABASE_URL || process.env.DB_URL)
 } else {
-    sequelize = new Sequelize('sqlite::memory')
+    sequelize = new Sequelize({
+        dialect: 'sqlite',
+        storage: ':memory:'
+    })
 }
 
 module.exports = sequelize
